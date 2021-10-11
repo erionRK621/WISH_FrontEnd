@@ -2,11 +2,10 @@ import React from 'react'
 
 const Postlist = () => {
     return (
-        <>
-          Postlist   
-        </>
+        <div>
+            PostList
+        </div>
     )
 }
 
-export default Postl
- Postlist
+export default Postlist
