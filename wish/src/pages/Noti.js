@@ -1,6 +1,6 @@
 import React from "react";
 import Card from "../components/Card";
-import Grid from "../components/Grid";
+import { Grid } from "../elements";
 
 const Noti = () => {
   return (

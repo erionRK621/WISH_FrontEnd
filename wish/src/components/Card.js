@@ -1,7 +1,7 @@
 import React from "react";
-import Grid from "./Grid";
+
 import styled from "styled-components";
-import { Image } from "../elements";
+import { Image, Grid } from "../elements";
 
 const Card = (props) => {
   const { image_url, user_name, post_id } = props;
