@@ -3,11 +3,13 @@ import { produce } from "immer";
 import "moment";
 import moment from "moment";
 
+//액션타입만들기
 const SET_COMMENT = "SET_COMMENT";
 const ADD_COMMENT = "ADD_COMMENT";
 
 const LOADING = "LOADING";
 
+//액션생성함수만들기
 const setComment = createAction(SET_COMMENT, (post_id, comment_list) => ({
   post_id,
   comment_list,
