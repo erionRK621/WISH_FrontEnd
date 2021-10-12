@@ -16,3 +16,4 @@ const deleteCookie = (name) => {
 };
 
 export { setCookie, deleteCookie };
+
