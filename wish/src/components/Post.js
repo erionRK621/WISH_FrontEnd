@@ -4,12 +4,10 @@ import styled from "styled-components";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import { useHistory } from "react-router-dom";
-
+import {history} from "../redux/configureStore"
 
 const Post = (props) => {
 
-    const history = useHistory();
     const  {image_url,user_profile, insert_dt} = props;
 
     return (
@@ -27,7 +25,7 @@ const Post = (props) => {
                     </div>
                 </Grid>
                 <Grid>
-                    <Image shape="rectangle" src={image_url}  />
+                    <Image shape="rectangle" src={image_url} />
                 </Grid>
                 <Grid is_flex>
                     <Text>{props.content}</Text>

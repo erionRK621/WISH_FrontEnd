@@ -2,16 +2,17 @@ import React from "react";
 import Post from "../components/Post";
 import { Grid } from "../elements";
 import styled from "styled-components";
+import { useSelector } from "react-redux";
 
-const PostList = () => {
+const PostList = (props) => {
+    const post_list = useSelector((state) => state.post.list);
+    console.log(post_list);
     return (
         <Grid>
             <GridWrap>
-                <PostGrid><Post/></PostGrid>
-                <PostGrid><Post/></PostGrid>
-                <PostGrid><Post/></PostGrid>
-                <PostGrid><Post/></PostGrid>
-                <PostGrid><Post/></PostGrid>
+            {post_list.map((p,idx) => {
+                    return <PostGrid><Post key={p.id} {...p}/></PostGrid>
+                })}
             </GridWrap>
         </Grid>
     )
