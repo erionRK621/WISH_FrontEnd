@@ -11,10 +11,10 @@ const PostDetail = () => {
                 <Post/>
                 <div style={{textAlign:"center"}}>
                     <div>input / 작성버튼</div>
-                    <div>userprofile/ usernick / comment / deletebutton</div>
-                    <div>userprofile/ usernick / comment / deletebutton</div>
-                    <div>userprofile/ usernick / comment / deletebutton</div>
-                    <div>userprofile/ usernick / comment / deletebutton</div>
+                    <div>userprofile / usernick / comment / deletebutton</div>
+                    <div>userprofile / usernick / comment / deletebutton</div>
+                    <div>userprofile / usernick / comment / deletebutton</div>
+                    <div>userprofile / usernick / comment / deletebutton</div>
                 </div>
             </div>
         </>

@@ -29,7 +29,7 @@ const Post = (props) => {
                     <Text>{props.insert_dt}</Text>
                 </Grid>
                 <Grid is_flex>
-                    <Text bold>댓글{props.comment_cnt}개 모두 보기</Text>
+                    <Text bold>댓글{props.comment_cnt}개 모두보기</Text>
                     <FavoriteBorderIcon>{props.is_like}</FavoriteBorderIcon>
                 </Grid>
             </Grid>
