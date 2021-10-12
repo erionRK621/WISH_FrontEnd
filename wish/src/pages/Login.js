@@ -1,11 +1,13 @@
 import { SettingsPowerRounded } from "@material-ui/icons";
 import React from "react";
 import { Text, Button, Grid, Input } from "../elements/index";
+import { useSelector } from "react-redux";
 
 const Login = () => {
   const [id, setId] = React.useState();
   const [pwd, setPwd] = React.useState();
 
+  console.log(useSelector((state) => state.user));
   const login = () => {
     if (id === "" || pwd === "") {
       window.alert("아이디 혹은 비밀번호를 입력하여 주세요.");
@@ -31,8 +33,8 @@ const Login = () => {
 
         <Grid padding="16px 0px">
           <Input
-            label="ID"
-            placeholder="ID"
+            label="Email"
+            placeholder="Email을 입력해 주세요."
             _onChange={(e) => {
               setId(e.target.value);
             }}

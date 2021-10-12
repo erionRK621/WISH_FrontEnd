@@ -3,12 +3,12 @@ import { Grid, Text, Input, Button } from "../elements";
 
 import { useDispatch } from "react-redux";
 import { actionCreators as userActions } from "../redux/modules/user";
-import { emailCheck } from "../shared/common";
+import { useSelector } from "react-redux";
 
 const Signup = (props) => {
   const dispatch = useDispatch();
 
-  const [id, setId] = React.useState("");
+  const [email, setEmail] = React.useState("");
   const [pwd, setPwd] = React.useState("");
   const [pwd_check, setPwdCheck] = React.useState("");
   const [user_name, setUserName] = React.useState("");
@@ -16,13 +16,8 @@ const Signup = (props) => {
   // signupFB를 dispatch를 이용해 불러온다.
   const signup = () => {
     // 아이디가 공백이면 리턴! or 비밀번호가 공백이면 리턴! or 유저네임이 공백이면 리턴!
-    if (id === "" || pwd === "" || user_name === "") {
+    if (email === "" || pwd === "" || user_name === "") {
       window.alert("아이디, 패스워드, 닉네임을 모두 입력해주세요!");
-      return;
-    }
-
-    if (!emailCheck(id)) {
-      window.alert("이메일 형식이 맞지 않습니다!");
       return;
     }
 
@@ -31,7 +26,8 @@ const Signup = (props) => {
       window.alert("패스워드와 패스워드 확인이 일치하지 않습니다!");
       return;
     }
-    dispatch(userActions.signupFB(id, pwd, user_name));
+
+    dispatch(userActions.signup(email, pwd, user_name));
   };
 
   return (
@@ -44,9 +40,9 @@ const Signup = (props) => {
         <Grid padding="16px 0px">
           <Input
             label="이메일"
-            placeholder="E-mail"
+            placeholder="Email을 입력해 주세요."
             _onChange={(e) => {
-              setId(e.target.value);
+              setEmail(e.target.value);
             }}
           />
         </Grid>
