@@ -4,6 +4,7 @@ import styled from "styled-components";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import { useHistory } from "react-router-dom";
 
 
 const Post = (props) => {

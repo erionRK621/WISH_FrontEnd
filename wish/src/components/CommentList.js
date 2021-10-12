@@ -1,8 +1,4 @@
 import React from "react";
-<<<<<<< HEAD
-=======
-
->>>>>>> 69ac80485d20cf270c0d3b1d94b24c7d0e5c4930
 import { Image, Text, Grid } from "../elements";
 
 const CommentList = (props) => {
