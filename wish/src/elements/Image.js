@@ -14,6 +14,10 @@ const Image = (props) => {
     return <ImageCircle {...styles} onClick={_onClick}></ImageCircle>;
   }
 
+  if (shape === "card") {
+    return <CardImage {...styles} onClick={_onClick}></CardImage>;
+  }
+
   if (shape === "rectangle") {
     return (
       <AspectOutter>
@@ -64,6 +68,11 @@ const ImageCircle = styled.div`
   background-image: url("${(props) => props.src}");
   background-size: cover;
   margin: 4px;
+`;
+
+const CardImage = styled.div`
+  width: 100%;
+  height: auto;
 `;
 
 export default Image;
