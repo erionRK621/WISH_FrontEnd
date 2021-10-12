@@ -1,5 +1,5 @@
 import React from "react";
-import Grid from "./Grid";
+import { Grid } from "../elements";
 import styled from "styled-components";
 import { Image } from "../elements";
 
