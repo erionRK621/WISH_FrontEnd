@@ -1,15 +1,14 @@
-import React from 'react'
-import Post from '../components/Post'
-import { Grid } from '../elements'
-import styled from 'styled-components'
+import React from "react";
+import Post from "../components/Post";
+import { Grid } from "../elements";
+import styled from "styled-components";
 
 const PostList = () => {
-    return (
-            <Grid>
-                <Post/>
-            </Grid>
-    )
-}
+  return (
+    <Grid>
+      <Post />
+    </Grid>
+  );
+};
 
-
-export default PostList
+export default PostList;
