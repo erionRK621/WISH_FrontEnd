@@ -3,6 +3,8 @@ import React from "react";
 import { Image, Text, Grid } from "../elements";
 
 const CommentList = (props) => {
+  const { post_id } = props;
+
   return (
     <React.Fragment>
       <Grid padding="16px">
@@ -11,7 +13,6 @@ const CommentList = (props) => {
     </React.Fragment>
   );
 };
-
 CommentList.defaultProps = {
   post_id: null,
 };

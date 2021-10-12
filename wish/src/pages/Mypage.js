@@ -16,7 +16,7 @@ const Mypage = () => {
       </Grid>
       <GridWrap>
         <PostGrid>
-          <Image height="auto" shape="rectangle" />
+          <Image shape="rectangle" />
         </PostGrid>
         <PostGrid>
           <Image shape="rectangle" />
