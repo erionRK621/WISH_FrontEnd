@@ -24,11 +24,11 @@ function App() {
           <Switch>
             <Route path="/" exact component={PostList}></Route>
             <Route path="/write" exact component={PostWrite}></Route>
-            <Route path="/post/:id" exact component={PostDetail}/>
+            <Route path="/post/:id" exact component={PostDetail} />
             <Route path="/" exact component={PostWrite}></Route>
             <Route path="/mypage" exact component={Mypage}></Route>
             <Route path="/noti" exact component={Noti}></Route>
-            <Route path="/detail" exact component={CommentList}></Route>
+            <Route path="/detail" exact component={PostDetail}></Route>
           </Switch>
         </ConnectedRouter>
       </Grid>

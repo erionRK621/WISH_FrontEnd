@@ -1,6 +1,7 @@
 import React from "react";
+import Grid from "./Grid";
 import styled from "styled-components";
-import { Image, Grid } from "../elements";
+import { Image } from "../elements";
 
 const Card = (props) => {
   const { image_url, user_name, post_id } = props;
@@ -15,6 +16,6 @@ const Card = (props) => {
       </Grid>
     </Grid>
   );
-};
+  };
 
 export default Card;
