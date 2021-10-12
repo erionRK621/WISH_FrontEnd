@@ -13,6 +13,8 @@ const Input = (props) => {
     value,
     is_submit,
     onSubmit,
+    _onkeyup,
+    _onkeydown,
   } = props;
 
   if (multiLine) {
@@ -40,7 +42,7 @@ const Input = (props) => {
             onChange={_onChange}
             value={value}
             onKeyPress={(e) => {
-              if(e.key === "Enter"){
+              if (e.key === "Enter") {
                 onSubmit(e);
               }
             }}
