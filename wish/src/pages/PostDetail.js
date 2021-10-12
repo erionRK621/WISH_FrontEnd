@@ -12,7 +12,6 @@ const PostDetail = () => {
         <Post />
         <div style={{ textAlign: "center" }}>
           <CommentWrite />
-
           <CommentList />
         </div>
       </div>
