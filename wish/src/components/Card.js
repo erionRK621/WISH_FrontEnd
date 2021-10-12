@@ -1,5 +1,4 @@
 import React from "react";
-
 import styled from "styled-components";
 import { Image, Grid } from "../elements";
 
@@ -16,6 +15,6 @@ const Card = (props) => {
       </Grid>
     </Grid>
   );
-};
+  };
 
 export default Card;
