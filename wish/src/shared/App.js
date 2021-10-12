@@ -10,7 +10,7 @@ import { history } from "../redux/configureStore";
 import PostWrite from "../pages/PostWrite";
 import Mypage from "../pages/Mypage";
 import Header from "../components/Header";
-import PostList from "../pages/PostList"
+import PostList from "../pages/PostList";
 import PostDetail from "../pages/PostDetail";
 import Noti from "../pages/Noti";
 import CommentList from "../components/CommentList";

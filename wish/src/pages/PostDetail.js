@@ -37,21 +37,4 @@ Post.defaultProps = {
     is_me: false,
 }
 
-
-
-const PostContainer = styled.div`
-  background-color: white;
-  width: 60vw;
-  max-width: 400px;
-  margin: auto;
-  margin-top: 70px;
-  margin-bottom: 30px;
-  border-radius: 5px;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.12), 0 2px 5px rgba(0,0,0,0.24);
-  @media (max-width: 750px){
-    width: 80%;
-  }
-  @media (max-width: 450px){
-    width: 100%;
-`
 export default PostDetail

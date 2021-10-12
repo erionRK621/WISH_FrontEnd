@@ -4,7 +4,7 @@ import { Grid, Image, Text, Button } from "../elements";
 
 const Mypage = () => {
   return (
-    <Grid>
+    <Grid >
       <Grid is_flex padding="20px" backgroundColor="#e6f3f7">
         <Image shape="circle" size={85}></Image>
         <Text bold size="20px">
@@ -34,6 +34,7 @@ const Mypage = () => {
 
 const GridWrap = styled.div`
   max-width: 1300px;
+  margin: auto;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   grid-gap: 1em;

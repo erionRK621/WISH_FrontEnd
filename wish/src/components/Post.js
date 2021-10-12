@@ -1,13 +1,19 @@
 import React from 'react'
 import {Grid, Text, Image, Button} from "../elements"
+import {useHistory} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+
 import styled from "styled-components";
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
+
 const Post = (props) => {
 
+    const history = useHistory();
     const  {image_url,user_profile, insert_dt} = props;
+
     return (
         <PostContainer>
             <Grid padding="16px" bg="#ffffff" margin="8px 0px">
@@ -17,8 +23,9 @@ const Post = (props) => {
                         <Text bold>{props.user_info.user_name}</Text>
                     </Profile>
                     <div>                        
-                        <EditIcon >수정</EditIcon>
-                        <DeleteIcon >삭제</DeleteIcon>
+                        <EditIcon onClick={() =>{
+                            history.push("/write")}}>수정</EditIcon>
+                        <DeleteIcon onClick={() =>{}}>삭제</DeleteIcon>
                     </div>
                 </Grid>
                 <Grid>
@@ -54,14 +61,14 @@ Post.defaultProps = {
 const PostContainer = styled.div`
   background-color: white;
   width: 60vw;
-  max-width: 400px;
+  max-width: 350px;
   margin: auto;
   margin-top: 70px;
   margin-bottom: 30px;
   border-radius: 5px;
   box-shadow: 0 3px 6px rgba(0,0,0,0.12), 0 2px 5px rgba(0,0,0,0.24);
   @media (max-width: 750px){
-    width: 80%;
+    width: 100%;
   }
   @media (max-width: 450px){
     width: 100%;
