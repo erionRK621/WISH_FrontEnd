@@ -40,6 +40,6 @@ CommentItem.defaultProps = {
   user_name: "nickname",
   user_id: "",
   post_id: 1,
-  contents: "댓글 내용입니다.",
+  contents: "댓글 내용입니다....",
   insert_dt: "2021-01-01 19:00:00",
 };
