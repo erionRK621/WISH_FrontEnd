@@ -6,27 +6,20 @@ const Login = () => {
   const [id, setId] = React.useState();
   const [pwd, setPwd] = React.useState();
 
-
-  function characterCheck(obj){
-    const regExp = /[ \{\}\[\]\/?,;:|\)*~`!^\-+┼<>\#$%&\'\"\\\(\=]/gi; 
-
-        if(regExp.test(obj.value)){
-            window.alert("특수문자는 입력하실 수 없습니다.");
-            obj.value = obj.value.substring(0, obj.value.length -1); //입력받은 특수문자 한자리 지움
-        }
-  }
-
-  
-  
-
   const login = () => {
-    if(id === "" || pwd === ""){
-        window.alert("아이디 혹은 비밀번호를 입력하여 주세요.");
-        return;
+    if (id === "" || pwd === "") {
+      window.alert("아이디 혹은 비밀번호를 입력하여 주세요.");
+      return;
     }
+  };
 
-    if(!)
+  function characterCheck(obj) {
+    const regExp = /[ \{\}\[\]\/?,;:|\)*~`!^\-+┼<>\#$%&\'\"\\\(\=]/gi;
 
+    if (regExp.test(obj.value)) {
+      window.alert("특수문자는 입력하실 수 없습니다.");
+      obj.value = obj.value.substring(0, obj.value.length - 1); //입력받은 특수문자 한자리 지움
+    }
   }
 
   return (
