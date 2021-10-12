@@ -3,17 +3,19 @@ import { Grid, Text, Button, Image, Input } from "../elements";
 import Upload from "../shared/Upload";
 
 import { useSelector, useDispatch } from "react-redux";
-import Header from "../components/Header";
+import { actionCreators as postActions } from "../redux/modules/post";
 
 const PostWrite = (props) => {
   const dispatch = useDispatch();
-
-  const { history } = props;
-
   const [contents, setContents] = React.useState("");
+  console.log(useSelector((state) => state.user));
 
   const changeContents = (e) => {
     setContents(e.target.value);
+  };
+
+  const addPost = () => {
+    dispatch(postActions.addPosts(contents));
   };
 
   return (
@@ -36,6 +38,7 @@ const PostWrite = (props) => {
 
       <Grid padding="16px">
         <Input
+          value={contents}
           _onChange={changeContents}
           label="게시글 내용"
           placeholder="게시글 작성"
@@ -44,7 +47,7 @@ const PostWrite = (props) => {
       </Grid>
 
       <Grid padding="16px">
-        <Button text="게시글 작성"></Button>
+        <Button text="게시글 작성" _onClick={addPost}></Button>
       </Grid>
     </React.Fragment>
   );
