@@ -27,7 +27,7 @@ const Signup = (props) => {
       return;
     }
 
-    dispatch(userActions.signup(user_name, email, pwd));
+    dispatch(userActions.signupDB(user_name, email, pwd, pwd_check));
   };
 
   return (
