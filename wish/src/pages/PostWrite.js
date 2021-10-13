@@ -3,7 +3,7 @@ import { Grid, Text, Button, Image, Input } from "../elements";
 import Upload from "../shared/Upload";
 
 import { useSelector, useDispatch } from "react-redux";
-import { actionCreators as postActions } from "../redux/modules/post";
+import { actionCreators as testActions } from "../redux/modules/postWrite";
 
 const PostWrite = (props) => {
   const dispatch = useDispatch();
@@ -15,7 +15,7 @@ const PostWrite = (props) => {
   };
 
   const addPost = () => {
-    dispatch(postActions.addPosts(contents));
+    dispatch(testActions.addPosts(contents));
   };
 
   return (
