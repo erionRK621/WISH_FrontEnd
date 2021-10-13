@@ -1,3 +1,4 @@
+import { Api } from "@mui/icons-material";
 import instance from "../lib/axios";
 
 //const accessToken = document.cookie.split("=")[1];
@@ -25,4 +26,6 @@ export const apis = {
 
   // Signup(): () => instance.post("/signup")
   login: (params) => instance.post("/login", params),
+
+  signup: (params) => instance.post("/signup", params),
 };
