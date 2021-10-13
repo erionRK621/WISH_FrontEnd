@@ -9,9 +9,9 @@ import instance from "../lib/axios";
 // get과 delete의 경우 두 번째 인자에 데이터를 담아 보낼수 없기 때문에 서버에 데이터를 보낼경우 쿼리를 이용하여 보내주도록 합니다.
 
 export const apis = {
-  getPost: () => instance.get("/post"),
+  getPost: () => instance.get("/api/postings/"),
   // 게시물 불러오기
-  createPost: (contents) => instance.post("/post", contents),
+  createPost: (contents) => instance.post("/api/addpostings", contents),
   // 게시물 작성하기
   editPost: (id, contents) => instance.put(`/post/${id}`, contents),
   // 게시물 수정하기

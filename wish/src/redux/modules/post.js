@@ -3,6 +3,9 @@ import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
 import "moment";
 import moment from "moment";
+import {apis} from '../../shared/api'
+import instance from '../../lib/axios'
+
 
 // 액션타입생성(리듀서 작성시 재사용되기 때문에 액션타입을 지정하는것임)
 const SET_POST = "SET_POST";
@@ -57,15 +60,38 @@ const initialPost = {
   insert_dt: moment().format("YYYY-MM-DD hh:mm:ss"),
 };
 
+
 //미들웨어
-// const getPostDB = () => {
+//메인페이지 게시글 가져오기
+const getPostDB = () => {
+  return function (dispatch, getState, { history }) {
+    apis
+    .getPost()
+      .then((res) => {
+        console.log(res);
+        console.log(res.data);
+        dispatch(setPost(res.data));
+      }).catch(err => {
+        //요청이 정상적으로 안됬을때 수행
+        console.log(err,"에러")
+      })
+
+  }
+}
+
+// const addPostDB = () => {
 //   return function (dispatch, getState, { history }) {
-//     axios
-//       .get('www.wish.shop/api/posting?')
+//     apis
+//       .createPost({
+//         like_cnt: 10,
+//         comment_cnt: 10,
+//         is_like: false,
+//         is_me: false,
+//       },)
 //       .then((res) => {
 //         console.log(res);
 //         console.log(res.data);
-//         dispatch(setPost(res.data.result));
+//         dispatch(setPost(res.data));
 //       }).catch(err => {
 //         //요청이 정상적으로 안됬을때 수행
 //         console.log("에러")
@@ -74,9 +100,20 @@ const initialPost = {
 //   }
 // }
 
+
 const editPostDB = () => {
   return function (dispatch, getState, { history }) {};
 };
+
+// const deletePostDB = () => {
+//   return function (dispatch, getState, { history }) {
+//     if(!post_id) {
+//       window.alert("아이디가 없습니다.")
+//       return
+//     }
+//     return
+//   };
+// }
 
 // 리듀서
 export default handleActions(
@@ -85,6 +122,7 @@ export default handleActions(
       produce(state, (draft) => {
         //   데이터를 기존 데이터에 추가해요.
         draft.list.push(...action.payload.post_list);
+
         draft.list = draft.list.reduce((acc, cur) => {
           if (acc.findIndex((a) => a.id === cur.id) === -1) {
             return [...acc, cur];
@@ -128,6 +166,8 @@ const actionCreators = {
   setPost,
   editPost,
   deletePost,
+  getPostDB,
+  // deletePostDB,
 };
 
 export { actionCreators };
