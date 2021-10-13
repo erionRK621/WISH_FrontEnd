@@ -9,22 +9,30 @@ import moment from "moment";
 
 //액션타입만들기
 const LOAD_COMMENT = "LOAD_COMMENT";
+const ADD_COMMENT = "ADD_COMMENT";
 
 //액션생성함수만들기
-const loadComment = createAction(LOAD_COMMENT, (list) => ({
-  list,
+const loadComment = createAction(LOAD_COMMENT, (post_id, comment_list) => ({
+  post_id,
+  comment_list,
+}));
+const addComment = createAction(ADD_COMMENT, (post_id, comment) => ({
+  post_id,
+  comment,
 }));
 
 //initialState 만들기
 const initialState = {
-  list: [],
+  list: {
+    post_id: "post_id",
+    comment: "블라블라",
+    nickname: "닉네임",
+  },
 };
 
 const initialComment = {
-  postId: "postId",
+  post_id: "post_id",
   comment: "블라블라",
-  image:
-    "https://s3.ap-northeast-2.amazonaws.com/elasticbeanstalk-ap-northeast-2-176213403491/media/magazine_img/magazine_301/3-4-3.jpg",
   nickname: "닉네임",
 };
 
@@ -88,6 +96,10 @@ export default handleActions(
       produce(state, (draft) => {
         draft.list = action.payload.list;
       }),
+    [ADD_COMMENT]: (state, action) =>
+      produce(state, (draft) => {
+        draft.list[action.payload.post_id].unshift(action.payload.comment);
+      }),
   },
   initialState
 );
@@ -95,6 +107,8 @@ export default handleActions(
 //actionCreators 내보내기
 const actionCreators = {
   getCommentList,
+  loadComment,
+  addComment,
 };
 
 export { actionCreators };
