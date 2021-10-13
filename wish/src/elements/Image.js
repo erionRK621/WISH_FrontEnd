@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 // Image 함수형 컴포넌트를 만들어 준다.
 const Image = (props) => {
-  const { shape, src, size, _onClick } = props;
+  const { shape, src, size, _onClick, children } = props;
 
   const styles = {
     src: src,
@@ -25,11 +25,18 @@ const Image = (props) => {
       </AspectOutter>
     );
   }
+
+  if (shape === "main") {
+    return <MainInner {...styles} onClick={_onClick}></MainInner>;
+  }
+
   return (
     <React.Fragment>
       <ImageDefault {...styles} onClick={_onClick}></ImageDefault>
     </React.Fragment>
   );
+
+  
 };
 
 Image.defaultProps = {
@@ -74,5 +81,23 @@ const CardImage = styled.div`
   width: 100%;
   height: auto;
 `;
+
+const MainImage = styled.div`
+  width: 100%;
+  height: auto;
+`;
+
+const MainInner = styled.div`
+  width: 100%;
+  min-width: 25rem;
+  position: relative;
+  padding-top: 45%;
+  overflow: hidden;
+  background-image: url("${(props) => props.src}");
+  background-position: center;
+  /* background-size: cover; */
+`;
+
+
 
 export default Image;
