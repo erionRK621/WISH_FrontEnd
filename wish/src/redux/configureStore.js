@@ -5,12 +5,13 @@ import { connectRouter } from "connected-react-router";
 
 import User from "./modules/user";
 import Post from "./modules/post";
-
+import PostWrite from "./modules/postWrite";
 export const history = createBrowserHistory();
 
 const rootReducer = combineReducers({
   user: User,
   post: Post,
+  postWrite: PostWrite,
   // image: Image,
   // comment: Comment,
   // 8. 리덕스에 history를 이제 넣어줄 것이다. 우리가 만든 history와 우리의 라우터가 연결이되는 것이다. 그리고 이것의 우리의 스토어에 저장이되는 것이다.

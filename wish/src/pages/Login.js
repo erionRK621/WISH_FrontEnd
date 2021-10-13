@@ -7,7 +7,14 @@ const Login = () => {
   const [id, setId] = React.useState();
   const [pwd, setPwd] = React.useState();
 
-  console.log(useSelector((state) => state.user));
+  console.log(
+    "사용자",
+    useSelector((state) => state.user)
+  );
+  console.log(
+    "게시물",
+    useSelector((state) => state.postWrite)
+  );
   const login = () => {
     if (id === "" || pwd === "") {
       window.alert("아이디 혹은 비밀번호를 입력하여 주세요.");
