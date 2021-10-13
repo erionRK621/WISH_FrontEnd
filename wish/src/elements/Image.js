@@ -91,7 +91,7 @@ const MainInner = styled.div`
   width: 100%;
   min-width: 25rem;
   position: relative;
-  padding-top: 45%;
+  padding-top: 35%;
   overflow: hidden;
   background-image: url("${(props) => props.src}");
   background-position: center;

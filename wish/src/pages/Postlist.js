@@ -25,10 +25,7 @@ const PostList = (props) => {
                     }}
                     ><Post key={p.id} {...p}/></Grid>
                 })}
-                <Grid><Post/></Grid>
-                <Grid><Post/></Grid>
-                <Grid><Post/></Grid>
-                <Grid><Post/></Grid>
+               
             </GridWrap>
         </Grid>
         </>
