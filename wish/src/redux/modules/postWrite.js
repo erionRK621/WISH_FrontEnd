@@ -3,6 +3,7 @@ import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
 import "moment";
 import moment from "moment";
+import instance from "../../lib/axios";
 
 // Actions
 
@@ -30,6 +31,18 @@ const initialState = {
     },
   ],
 };
+
+// const addPostDB = () = {
+//   return function (dispatch, getState, { history }) {
+//     instance
+//       .post(`api주소`, {데이터} ,{withCredentials: true})
+//         .then()
+
+//         }
+//       )
+//        .then()
+//   }
+// }
 
 const addPosts = (contents = "") => {
   return function (dispatch, getState, { history }) {

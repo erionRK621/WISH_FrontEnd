@@ -38,7 +38,7 @@ function App() {
           is_float
           text="+"
           _onClick={() => {
-            history.push("/write");
+            history.push("/");
           }}
         ></Button>
       </Grid>
