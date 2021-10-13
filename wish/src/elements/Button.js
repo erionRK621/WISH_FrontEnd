@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import AddCircleIcon from '@mui/icons-material/AddCircle';
 
 const Button = (props) => {
   const { text, _onClick, is_float, children, margin, width, padding } = props;
@@ -7,7 +8,7 @@ const Button = (props) => {
   if (is_float) {
     return (
       <React.Fragment>
-        <FloatButton onClick={_onClick}>{text ? text : children}</FloatButton>
+        <FloatButton onClick={_onClick}><AddCircleIcon/></FloatButton>
       </React.Fragment>
     );
   }

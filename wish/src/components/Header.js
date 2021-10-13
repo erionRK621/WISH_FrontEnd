@@ -1,5 +1,7 @@
 import React from "react";
 import { Grid, Text, Button } from "../elements";
+import Logo from "../shared/img/logo.png"
+import styled from 'styled-components';
 import LoginIcon from '@mui/icons-material/Login';
 
 // useSelector는 store에 있는 값을 가져와서 사용할수 있도록 해주는 친구이다.
@@ -64,19 +66,9 @@ const Header = (props) => {
   return (
     <React.Fragment>
       <Grid is_flex>
-        <Grid>
-          <Text
-            margin="0px"
-            size="24px"
-            bold
-            _onClick={() => {
-              history.push("/");
-            }}
-          >
-            WISH
-          </Text>
-        </Grid>
-
+        <addLogo>
+          <img src={Logo} style={{width: "30%"}}/>
+        </addLogo>
         <Grid is_flex>
           <Button
             text="로그인"
@@ -98,4 +90,11 @@ const Header = (props) => {
 
 Header.defaultProps = {};
 
+
+const addLogo = styled.a`
+    display:block;
+    width: 30px;
+    height: 20px;
+    cursor: pointer;
+`;
 export default Header;

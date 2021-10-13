@@ -64,7 +64,7 @@ const PostContainer = styled.div`
   width: 60vw;
   max-width: 350px;
   margin: auto;
-  margin-top: 70px;
+  margin-top: 30px;
   margin-bottom: 30px;
   border-radius: 5px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12), 0 2px 5px rgba(0, 0, 0, 0.24);
