@@ -62,6 +62,7 @@ const initialPost = {
 
 
 //미들웨어
+//메인페이지 게시글 가져오기
 const getPostDB = () => {
   return function (dispatch, getState, { history }) {
     apis
@@ -104,6 +105,16 @@ const editPostDB = () => {
   return function (dispatch, getState, { history }) {};
 };
 
+// const deletePostDB = () => {
+//   return function (dispatch, getState, { history }) {
+//     if(!post_id) {
+//       window.alert("아이디가 없습니다.")
+//       return
+//     }
+//     return
+//   };
+// }
+
 // 리듀서
 export default handleActions(
   {
@@ -111,6 +122,7 @@ export default handleActions(
       produce(state, (draft) => {
         //   데이터를 기존 데이터에 추가해요.
         draft.list.push(...action.payload.post_list);
+
         draft.list = draft.list.reduce((acc, cur) => {
           if (acc.findIndex((a) => a.id === cur.id) === -1) {
             return [...acc, cur];
@@ -154,7 +166,8 @@ const actionCreators = {
   setPost,
   editPost,
   deletePost,
-  getPostDB
+  getPostDB,
+  // deletePostDB,
 };
 
 export { actionCreators };

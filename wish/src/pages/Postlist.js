@@ -11,6 +11,9 @@ const PostList = (props) => {
     const dispatch = useDispatch();
     const {history} = props;
     const post_list = useSelector((state) => state.postWrite.list);
+    const user_info = useSelector((state) => state.user);
+    console.log(post_list);
+    console.log(user_info);
 
     useEffect(() => {
       dispatch(postCreators.getPostDB());
@@ -23,8 +26,9 @@ const PostList = (props) => {
         <Grid>
             <GridWrap>
             {post_list.map((p,idx) => {
+                    console.log(p);
                     return <Grid
-                    key={p.id}
+                    key={idx}
                     _onClick={() => {
                       history.push(`/post/${p.id}`);
                     }}

@@ -5,9 +5,19 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { history } from "../redux/configureStore";
+import { actionCreators as deleteActions } from "../redux/modules/postWrite";
+
+import { useSelector, useDispatch } from "react-redux";
 
 const Post = (props) => {
+  const dispatch = useDispatch();
   const { image_url, user_profile, insert_dt } = props;
+  const post_list = useSelector((state) => state.postWrite.list);
+
+  // const deletePost = () => {
+  //   dispatch(deleteActions.deletePostDB(contents));
+  // };
+  
 
   return (
     <PostContainer>
