@@ -70,6 +70,12 @@ const getPostDB = () => {
       .then((res) => {
         console.log(res);
         console.log(res.data);
+        if(res.data.token){
+          window.localStorage.setItem(
+            "token",
+            JSON.stringify(res.data.token)
+          );
+        }        
         dispatch(setPost(res.data));
       }).catch(err => {
         //요청이 정상적으로 안됬을때 수행
@@ -100,45 +106,46 @@ const getPostDB = () => {
 //   }
 // }
 
+//게시글 DB에서 삭제
+const deletePostDB = (post_id) => {
+  return function (dispatch, getState, { history }) {
+    apis
+    .deletePost()
+    .then((res) => {
+      console.log(res)
+      dispatch(deletePost(post_id));
+    }).catch((err) =>{
+      console.log("삭제에러", err)
+    })
+  }
+}
 
-const editPostDB = () => {
-  return function (dispatch, getState, { history }) {};
-};
-
-// const deletePostDB = () => {
-//   return function (dispatch, getState, { history }) {
-//     if(!post_id) {
-//       window.alert("아이디가 없습니다.")
-//       return
-//     }
-//     return
-//   };
-// }
 
 // 리듀서
 export default handleActions(
   {
     [SET_POST]: (state, action) =>
       produce(state, (draft) => {
-        //   데이터를 기존 데이터에 추가해요.
-        draft.list.push(...action.payload.post_list);
+        // undifined는 값이 잘넘어가고있다. 값이 나올경우 어딘가에 문제가 있는것
+        console.log(action.payload.postings);
+        draft.list.push(...action.payload.post_list.postings);
 
-        draft.list = draft.list.reduce((acc, cur) => {
-          if (acc.findIndex((a) => a.id === cur.id) === -1) {
-            return [...acc, cur];
-          } else {
-            acc[acc.findIndex((a) => a.id === cur.id)] = cur;
-            return acc;
-          }
-        }, []);
+        // draft.list = draft.list.reduce((acc, cur) => {
+        //   if (acc.findIndex((a) => a.id === cur.id) === -1) {
+        //     return [...acc, cur];
+        //   } else {
+        //     acc[acc.findIndex((a) => a.id === cur.id)] = cur;
+        //     return acc;
+        //   }
+        // }, []);
 
         // 페이징도 넣어줍니다.
-        if (action.payload.paging) {
-          draft.paging = action.payload.paging;
-        }
-        //payload안에는 필요한 state값을 담고있다.
+        // if (action.payload.paging) {
+        //   draft.paging = action.payload.paging;
+        // }
+        // //payload안에는 필요한 state값을 담고있다.
 
-        draft.is_loading = false;
+        // draft.is_loading = false;
       }),
 
     [EDIT_POST]: (state, action) =>
@@ -151,12 +158,18 @@ export default handleActions(
       }),
     [DELETE_POST]: (state, action) =>
       produce(state, (draft) => {
-        let idx = draft.list.findIndex((p) => p.id === action.payload.post_id);
+        
+        let new_post_list = draft.list
+        
+        
+        
+        // let idx = draft.list.findIndex((p) => p.id === action.payload.post_id);
 
-        if (idx !== -1) {
-          // 배열에서 idx 위치의 요소 1개를 지움
-          draft.list.splice(idx, 1);
-        }
+
+        // if (idx !== -1) {
+        //   // 배열에서 idx 위치의 요소 1개를 지움
+        //   draft.list.splice(idx, 1);
+        // }
       }),
   },
   initialState
@@ -165,9 +178,8 @@ export default handleActions(
 const actionCreators = {
   setPost,
   editPost,
-  deletePost,
+  deletePostDB,
   getPostDB,
-  // deletePostDB,
 };
 
 export { actionCreators };

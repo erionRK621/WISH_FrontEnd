@@ -7,6 +7,8 @@ import { useDispatch, useSelector } from "react-redux";
 const CommentWrite = (props) => {
   const dispatch = useDispatch();
   const [comment_text, setCommentText] = React.useState();
+
+  const { post_id } = props;
   //const comment = useSelector((state) => state.comment.list);
 
   // useEffect(() => {
@@ -19,7 +21,7 @@ const CommentWrite = (props) => {
 
   const write = () => {
     console.log(comment_text);
-    //dispatch(commentActions.addComment(post_id, comment_text));
+    dispatch(commentActions.addComments(post_id, comment_text));
     setCommentText("");
   };
   return (
