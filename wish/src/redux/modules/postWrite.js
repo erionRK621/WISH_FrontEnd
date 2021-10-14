@@ -3,6 +3,7 @@ import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
 import "moment";
 import moment from "moment";
+import instance from "../../lib/axios";
 
 // Actions
 
@@ -31,38 +32,34 @@ const initialState = {
   ],
 };
 
+// const addPostDB = () = {
+//   return function (dispatch, getState, { history }) {
+//     instance
+//       .post(`api주소`, {데이터} ,{withCredentials: true})
+//         .then()
+
+//         }
+//       )
+//        .then()
+//   }
+// }
+
 const addPosts = (contents = "") => {
   return function (dispatch, getState, { history }) {
     const _user = getState().user;
     console.log("_user", _user);
 
-    const user_info = {
-      user_name: _user.nick,
-      user_profile: _user.user_profile,
-    };
-
-    const _post = {
-      ...initialState,
-      content: contents,
-      insert_dt: moment().format("YYYY-MM-DD hh:mm:ss"),
-    };
-
-    const posts = {
-      user_info,
-      ...initialState,
-      content: contents,
-      insert_dt: moment().format("YYYY-MM-DD hh:mm:ss"),
-    };
-    // postID 를 만들어야함. => 1) 사용자 nick과 시간 2)
+    let time = moment().format("YYYY-MM-DD hh:mm:ss");
 
     let post = {
       ...initialState,
       list: {
         user_info: {
-          user_name: _user.nick,
+          user_email: _user.email,
+          user_nick: _user.nick,
           user_profile: _user.user_profile,
         },
-        id: `${_user.email}${_post.insert_dt}`,
+        id: `${_user.email}${time}`,
         image_url:
           "https://images.unsplash.com/photo-1581235720704-06d3acfcb36f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=880&q=80",
         content: contents,

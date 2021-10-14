@@ -1,13 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Post from "../components/Post";
 import Banner from "../shared/img/wish1.jpg";
 import { Button, Grid, Image } from "../elements";
 import styled from "styled-components";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { actionCreators as postCreators } from "../redux/modules/post";
 
 const PostList = (props) => {
+  const dispatch = useDispatch();
   const { history } = props;
-  const post_list = useSelector((state) => state.post.list);
+  const post_list = useSelector((state) => state.postWrite.list);
+  const user_info = useSelector((state) => state.user);
+  console.log(post_list);
+  console.log(user_info);
+
+  useEffect(() => {
+    dispatch(postCreators.getPostDB());
+  }, []);
 
   console.log(post_list);
   return (
@@ -16,9 +25,10 @@ const PostList = (props) => {
       <Grid>
         <GridWrap>
           {post_list.map((p, idx) => {
+            console.log(p);
             return (
               <Grid
-                key={p.id}
+                key={idx}
                 _onClick={() => {
                   history.push(`/post/${p.id}`);
                 }}
@@ -27,18 +37,6 @@ const PostList = (props) => {
               </Grid>
             );
           })}
-          <Grid>
-            <Post />
-          </Grid>
-          <Grid>
-            <Post />
-          </Grid>
-          <Grid>
-            <Post />
-          </Grid>
-          <Grid>
-            <Post />
-          </Grid>
         </GridWrap>
       </Grid>
     </>
