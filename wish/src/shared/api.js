@@ -16,10 +16,10 @@ export const apis = {
   // 게시물 작성하기
   editPost: (id, contents) => instance.put(`/post/${id}`, contents),
   // 게시물 수정하기
-  deletePost: (id) => instance.delete(`/post/${id}`),
+  deletePost: (id) => instance.delete(`/postings/${id}`, id),
   // 게시물 삭제하기
 
-  getComment: () => instance.get("/comment"),
+  getComment: () => instance.get("/api/postings/:postingId/comments"),
   // 댓글 불러오기
   addComment: (email, id) => instance.post("/comment", email, id),
   // 댓글 등록하기

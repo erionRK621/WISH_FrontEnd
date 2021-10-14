@@ -1,15 +1,32 @@
 import React from "react";
-import { Grid } from "../elements";
+import { Grid, Button } from "../elements";
 import Post from "../components/Post";
 import styled from "styled-components";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { history } from "../redux/configureStore";
+
 import CommentList from "../components/CommentList";
 import CommentWrite from "../components/CommentWrite";
 
-const PostDetail = () => {
+const PostDetail = (props) => {
+
+  const post_id = props.match.params.id;
+  console.log(post_id)
   return (
     <>
       <div>
         <Post />
+        <Grid is_flex>
+            <Button
+              _onClick={() => {
+                history.push("/write");
+              }}
+            >
+              수정
+            </Button>
+            <Button>삭제</Button>
+        </Grid>
         <div style={{ textAlign: "center" }}>
           <CommentWrite />
           <CommentList />

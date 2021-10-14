@@ -7,41 +7,42 @@ import { useSelector, useDispatch } from "react-redux";
 import { actionCreators as postCreators } from "../redux/modules/post";
 
 const PostList = (props) => {
-  const dispatch = useDispatch();
-  const { history } = props;
-  const post_list = useSelector((state) => state.postWrite.list);
-  const user_info = useSelector((state) => state.user);
-  console.log(post_list);
-  console.log(user_info);
 
-  useEffect(() => {
-    dispatch(postCreators.getPostDB());
-  }, []);
+    const dispatch = useDispatch();
+    const {history} = props;
+    const post_list = useSelector((state) => state.post.list);
+    const user_info = useSelector((state) => state.user);
+    
+    console.log(user_info);
 
-  console.log(post_list);
-  return (
-    <>
+    useEffect(() => {
+      dispatch(postCreators.getPostDB());
+    }, []);
+
+    console.log(post_list);
+    return (
+      <>
       <Image shape="main" src={Banner} style={{ position: "absolute" }} />
-      <Grid>
-        <GridWrap>
-          {post_list.map((p, idx) => {
-            console.log(p);
-            return (
-              <Grid
-                key={idx}
-                _onClick={() => {
-                  history.push(`/post/${p.id}`);
-                }}
-              >
-                <Post key={p.id} {...p} />
-              </Grid>
-            );
-          })}
-        </GridWrap>
-      </Grid>
-    </>
-  );
-};
+        <Grid>
+          
+            <GridWrap>
+            {post_list.map((p,idx) => {
+                    console.log(p);
+                    return <Grid
+                    key={idx}
+                    _onClick={() => {
+                      history.push(`/post/${p._id}`);
+                    }}
+                    ><Post key={p._id} {...p}/></Grid>
+                })}
+               
+            </GridWrap>
+        </Grid>
+        </>
+    )
+}
+
+
 
 const GridWrap = styled.div`
   max-width: 1300px;

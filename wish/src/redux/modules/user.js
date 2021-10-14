@@ -53,6 +53,7 @@ const loginDB = (email, password) => {
         dispatch(
           logIn({
             token: response.data.token,
+            is_login : true,
           })
         );
         window.localStorage.setItem(
@@ -107,6 +108,7 @@ export default handleActions(
         console.log("여기", action.payload.user);
         console.log("이것은 draft", draft);
         draft.token = action.payload.user.token;
+        draft.is_login = action.payload.user.is_login;
       }),
 
     [SET_USER]: (state, action) =>
