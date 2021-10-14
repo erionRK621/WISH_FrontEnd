@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Image, Text, Grid } from "../elements";
+import { actionCreators as commentCreators } from "../redux/modules/comment";
+import { useSelector, useDispatch } from "react-redux";
 
 const CommentList = (props) => {
   const { post_id } = props;
@@ -19,8 +21,13 @@ CommentList.defaultProps = {
 export default CommentList;
 
 const CommentItem = (props) => {
+  const dispatch = useDispatch();
   const { user_profile, user_name, user_id, post_id, contents, insert_dt } =
     props;
+
+  useEffect(() => {
+    dispatch(commentCreators.getCommentListDB());
+  }, []);
   return (
     <Grid is_flex>
       <Grid is_flex width="auto">

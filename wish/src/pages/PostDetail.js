@@ -5,7 +5,9 @@ import styled from "styled-components";
 import CommentList from "../components/CommentList";
 import CommentWrite from "../components/CommentWrite";
 
-const PostDetail = () => {
+const PostDetail = (props) => {
+  const post_id = props.match.params.id;
+  console.log(post_id);
   return (
     <>
       <div>
