@@ -1,13 +1,21 @@
 import React from "react";
 import { Grid, Text, Image, Button } from "../elements";
 import styled from "styled-components";
-import EditIcon from "@mui/icons-material/Edit";
-import DeleteIcon from "@mui/icons-material/Delete";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import { history } from "../redux/configureStore";
+
+import { useSelector, useDispatch } from "react-redux";
 
 const Post = (props) => {
+  const dispatch = useDispatch();
   const { image_url, user_profile, insert_dt } = props;
+  const post_list = useSelector((state) => state.post.list);
+  console.log(post_list);
+
+
+  // const deletePost = () => {
+  //   dispatch(deleteActions.deletePostDB(contents));
+  // };
+  
 
   return (
     <PostContainer>
@@ -17,19 +25,10 @@ const Post = (props) => {
             <Image shape="circle" src={user_profile} />
             <Text bold>{props.user_info.user_name}</Text>
           </Profile>
-          <div>
-            <EditIcon
-              onClick={() => {
-                history.push("/write");
-              }}
-            >
-              수정
-            </EditIcon>
-            <DeleteIcon onClick={() => {}}>삭제</DeleteIcon>
-          </div>
+          
         </Grid>
         <Grid>
-          <Image shape="rectangle" src={image_url} />
+          <Image shape="rectangle" src={props.imageUrl} />
         </Grid>
         <Grid is_flex>
           <Text>{props.content}</Text>
@@ -64,7 +63,7 @@ const PostContainer = styled.div`
   width: 60vw;
   max-width: 350px;
   margin: auto;
-  margin-top: 70px;
+  margin-top: 30px;
   margin-bottom: 30px;
   border-radius: 5px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12), 0 2px 5px rgba(0, 0, 0, 0.24);

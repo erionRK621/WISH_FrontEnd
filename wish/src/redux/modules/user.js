@@ -7,10 +7,11 @@ import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
 // 셋째, 쿠키를 가져온다.
 import { setCookie, getCookie, deleteCookie } from "../../shared/Cookie";
+import axios from "axios";
 
 // 2. actions(액션타입)
 // 첫째, 로그인 정보를 가지고 온다.
-//const LOG_IN = "LOG_IN";
+const LOG_IN = "LOG_IN";
 // 둘째, 로그아웃 정보를 가지고 온다.
 const LOG_OUT = "LOG_OUT";
 // 셋째, 유저정보를 가지고 온다.
@@ -20,7 +21,7 @@ const SET_USER = "SET_USER";
 
 // 3. action creator(액션 생성 함수들)
 // 첫째, createAction사용해서 LOG_IN타입을 넘겨준다. ()안에는 파라미터 값 즉 정보를 주고 user값을 넘겨준다.
-//const logIn = createAction(LOG_IN, (user) => ({ user }));
+const logIn = createAction(LOG_IN, (user) => ({ user }));
 const logOut = createAction(LOG_OUT, (user) => ({ user }));
 const getUser = createAction(GET_USER, (user) => ({ user }));
 const setUser = createAction(SET_USER, (user) => ({ user }));
@@ -40,28 +41,77 @@ const user_intial = {
     "https://images.unsplash.com/photo-1540331547168-8b63109225b7?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=719&q=80",
 };
 
-const signup = (nick, email, password) => {
+const loginDB = (email, password) => {
   return function (dispatch, getState, { history }) {
-    dispatch(
-      setUser({
-        nick: nick,
+    axios
+      .post("http://3.35.235.79/api/users/auth", {
         email: email,
         password: password,
       })
-    );
-    history.push("/write");
+      .then((response) => {
+        console.log(response);
+        dispatch(
+          logIn({
+            token: response.data.token,
+            is_login : true,
+          })
+        );
+        window.localStorage.setItem(
+          "token",
+          JSON.stringify(response.data.token)
+        );
+        history.push("/");
+      })
+      .catch((error) => {
+        console.log("Login Error", error);
+      });
+  };
+};
+
+const signupDB = (nick, email, password, confirmPassword) => {
+  return function (dispatch, getState, { history }) {
+    axios
+      .post(
+        "http://3.35.235.79/api/users",
+        {
+          nick: nick,
+          email: email,
+          password: password,
+          confirmPassword: confirmPassword,
+        }
+        // { withCredentials: true }
+      )
+      .then((response) => {
+        dispatch(
+          setUser({
+            nick: nick,
+            email: email,
+            password: password,
+            confirmPassword: confirmPassword,
+          })
+        );
+        history.push("/login");
+      })
+      .catch((error) => {
+        console.log("DB ERROR", error);
+      });
   };
 };
 
 // 5. reducer(리듀서)
 export default handleActions(
   {
-    [SET_USER]: (state, action) =>
+    [LOG_IN]: (state, action) =>
       produce(state, (draft) => {
         console.log("여기", action);
         console.log("여기", action.payload.user);
         console.log("이것은 draft", draft);
+        draft.token = action.payload.user.token;
+        draft.is_login = action.payload.user.is_login;
+      }),
 
+    [SET_USER]: (state, action) =>
+      produce(state, (draft) => {
         draft.nick = action.payload.user.nick;
         draft.email = action.payload.user.email;
         draft.password = action.payload.user.password;
@@ -81,7 +131,8 @@ export default handleActions(
 // 6. action creator export
 // 액션생성함수를 내보낸다.
 const actionCreators = {
-  signup,
+  signupDB,
+  loginDB,
 };
 
 export { actionCreators };

@@ -3,19 +3,28 @@ import { Grid, Text, Button, Image, Input } from "../elements";
 import Upload from "../shared/Upload";
 
 import { useSelector, useDispatch } from "react-redux";
-import { actionCreators as postActions } from "../redux/modules/post";
+import { actionCreators as postWriteAction } from "../redux/modules/postWrite";
 
 const PostWrite = (props) => {
   const dispatch = useDispatch();
   const [contents, setContents] = React.useState("");
   console.log(useSelector((state) => state.user));
 
+  const img = useSelector((state) => state.image.previewImage);
+
+  console.log(
+    "포스트",
+    useSelector((state) => state.postWrite)
+  );
+
+  console.log("타입", typeof img);
+
   const changeContents = (e) => {
     setContents(e.target.value);
   };
 
   const addPost = () => {
-    dispatch(postActions.addPosts(contents));
+    dispatch(postWriteAction.addPosts(contents, img));
   };
 
   return (
@@ -33,7 +42,11 @@ const PostWrite = (props) => {
             미리보기
           </Text>
         </Grid>
-        <Image shape="rectangle" src={"http://via.placeholder.com/400x300"} />
+        {img ? (
+          <Image shape="rectangle" src={img} />
+        ) : (
+          <Image shape="rectangle" src={"http://via.placeholder.com/400x300"} />
+        )}
       </Grid>
 
       <Grid padding="16px">

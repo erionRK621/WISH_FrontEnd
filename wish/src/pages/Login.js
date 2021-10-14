@@ -1,18 +1,26 @@
 import { SettingsPowerRounded } from "@material-ui/icons";
 import React from "react";
 import { Text, Button, Grid, Input } from "../elements/index";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { actionCreators as userActions } from "../redux/modules/user";
 
 const Login = () => {
-  const [id, setId] = React.useState();
+  const dispatch = useDispatch();
+  const [email, setEmail] = React.useState();
   const [pwd, setPwd] = React.useState();
+  const user = useSelector((state) => state.user);
+  console.log(
+    "사용자",
+    useSelector((state) => state.user)
+  );
 
-  console.log(useSelector((state) => state.user));
   const login = () => {
-    if (id === "" || pwd === "") {
+    if (email === "" || pwd === "") {
       window.alert("아이디 혹은 비밀번호를 입력하여 주세요.");
       return;
     }
+
+    dispatch(userActions.loginDB(email, pwd));
   };
 
   function characterCheck(obj) {
@@ -36,7 +44,7 @@ const Login = () => {
             label="Email"
             placeholder="Email을 입력해 주세요."
             _onChange={(e) => {
-              setId(e.target.value);
+              setEmail(e.target.value);
             }}
           />
         </Grid>
