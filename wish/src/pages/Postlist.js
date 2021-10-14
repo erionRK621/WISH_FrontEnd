@@ -18,6 +18,7 @@ const PostList = (props) => {
     useEffect(() => {
       dispatch(postCreators.getPostDB());
     }, []);
+    console.log("render")
 
     console.log(post_list);
     return (
