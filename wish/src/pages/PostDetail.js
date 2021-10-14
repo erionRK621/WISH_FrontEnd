@@ -10,22 +10,21 @@ import CommentList from "../components/CommentList";
 import CommentWrite from "../components/CommentWrite";
 
 const PostDetail = (props) => {
-
   const post_id = props.match.params.id;
-  console.log(post_id)
+  console.log(post_id);
   return (
     <>
       <div>
         <Post />
         <Grid is_flex>
-            <Button
-              _onClick={() => {
-                history.push("/write");
-              }}
-            >
-              수정
-            </Button>
-            <Button>삭제</Button>
+          <Button
+            _onClick={() => {
+              history.push("/write");
+            }}
+          >
+            수정
+          </Button>
+          <Button>삭제</Button>
         </Grid>
         <div style={{ textAlign: "center" }}>
           <CommentWrite />
