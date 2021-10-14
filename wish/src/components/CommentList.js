@@ -3,7 +3,7 @@ import { Image, Text, Grid } from "../elements";
 
 const CommentList = (props) => {
   const { post_id } = props;
-
+  console.log(props);
   return (
     <React.Fragment>
       <Grid padding="16px">
