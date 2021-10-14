@@ -9,6 +9,7 @@ const CommentWrite = (props) => {
   const [comment_text, setCommentText] = React.useState();
 
   const { post_id } = props;
+  console.log(post_id);
   //const comment = useSelector((state) => state.comment.list);
 
   // useEffect(() => {
@@ -19,9 +20,10 @@ const CommentWrite = (props) => {
     setCommentText(e.target.value);
   };
 
+  //axios 만들고 addComments를 addCommentDB로 바꿔줌
   const write = () => {
     console.log(comment_text);
-    dispatch(commentActions.addComments(post_id, comment_text));
+    dispatch(commentActions.addCommentDB(post_id, comment_text));
     setCommentText("");
   };
   return (
