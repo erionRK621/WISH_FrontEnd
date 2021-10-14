@@ -4,6 +4,8 @@ import { produce } from "immer";
 import "moment";
 import moment from "moment";
 import instance from "../../lib/axios";
+import axios from "axios";
+import getToken from "../../shared/Token";
 
 // Actions
 
@@ -44,10 +46,14 @@ const initialState = {
 //   }
 // }
 
-const addPosts = (contents = "") => {
+const addPosts = (contents = "", img = "") => {
   return function (dispatch, getState, { history }) {
     const _user = getState().user;
     console.log("_user", _user);
+
+    const token = window.localStorage.getItem("token");
+    const realToken = token.replace(/\"/gi, "");
+    console.log("토큰값", realToken);
 
     let time = moment().format("YYYY-MM-DD hh:mm:ss");
 
@@ -60,8 +66,7 @@ const addPosts = (contents = "") => {
           user_profile: _user.user_profile,
         },
         id: `${_user.email}${time}`,
-        image_url:
-          "https://images.unsplash.com/photo-1581235720704-06d3acfcb36f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=880&q=80",
+        image_url: img,
         content: contents,
         insert_dt: moment().format("YYYY-MM-DD hh:mm:ss"),
         like_cnt: 10,
@@ -71,7 +76,25 @@ const addPosts = (contents = "") => {
       },
     };
 
-    dispatch(addPost(post));
+    axios
+      .post(
+        "http://3.35.235.79/api/postings",
+        {
+          imageUrl: img,
+          text: contents,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${realToken}`,
+          },
+        }
+      )
+      .then((response) => {
+        dispatch(addPost(post));
+      })
+      .catch((error) => {
+        console.log("DB ERROR", error);
+      });
   };
 };
 

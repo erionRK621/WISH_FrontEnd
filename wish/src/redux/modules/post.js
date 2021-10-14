@@ -70,6 +70,12 @@ const getPostDB = () => {
       .then((res) => {
         console.log(res);
         console.log(res.data);
+        if(res.data.token){
+          window.localStorage.setItem(
+            "token",
+            JSON.stringify(res.data.token)
+          );
+        }        
         dispatch(setPost(res.data));
       }).catch(err => {
         //요청이 정상적으로 안됬을때 수행
@@ -152,12 +158,18 @@ export default handleActions(
       }),
     [DELETE_POST]: (state, action) =>
       produce(state, (draft) => {
-        let idx = draft.list.findIndex((p) => p.id === action.payload.post_id);
+        
+        let new_post_list = draft.list
+        
+        
+        
+        // let idx = draft.list.findIndex((p) => p.id === action.payload.post_id);
 
-        if (idx !== -1) {
-          // 배열에서 idx 위치의 요소 1개를 지움
-          draft.list.splice(idx, 1);
-        }
+
+        // if (idx !== -1) {
+        //   // 배열에서 idx 위치의 요소 1개를 지움
+        //   draft.list.splice(idx, 1);
+        // }
       }),
   },
   initialState
