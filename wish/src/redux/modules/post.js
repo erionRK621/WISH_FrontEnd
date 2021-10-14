@@ -26,22 +26,7 @@ const addPost = createAction(ADD_POST, (post) => ({ post }));
 const setPreview = createAction(SET_PREVIEW, (preview) => ({ preview }));
 //초기상태값
 const initialState = {
-  list: [
-    {
-      user_info: {
-        id: 0,
-        user_name: "wish",
-        user_profile:
-          "https://images.unsplash.com/photo-1540331547168-8b63109225b7?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=719&q=80",
-      },
-      image_url:
-        "https://images.unsplash.com/photo-1581235720704-06d3acfcb36f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=880&q=80",
-      contents: "",
-      like_cnt: 0,
-      comment_cnt: 10,
-      insert_dt: moment().format("YYYY-MM-DD hh:mm:ss"),
-    },
-  ],
+  list: [],
 };
 
 //게시글하나에 들어가야할 기본내용
