@@ -16,8 +16,23 @@ import Noti from "../pages/Noti";
 import CommentList from "../components/CommentList";
 import Login from "../pages/Login";
 import Signup from "../pages/Signup";
+import getToken from "./Token";
 
 function App() {
+  const is_token = window.localStorage.getItem("token") ? true : false;
+
+  // window.localStorage.removeItem("token"); 이건 로그아웃 할때
+
+  // 토큰 큰따옴표 제거 함수 shared 안에 Token.js 에서 가져옵니다.
+  console.log(getToken());
+
+  // console.log("트루냐 펄스냐", is_token);
+  React.useEffect(() => {
+    if (is_token) {
+      //유저 정보 받아오는 미들웨어 실행
+    }
+  }, []);
+
   return (
     <React.Fragment>
       <Grid>
@@ -38,7 +53,7 @@ function App() {
           is_float
           text="+"
           _onClick={() => {
-            history.push("/");
+            history.push("/write");
           }}
         ></Button>
       </Grid>

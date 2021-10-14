@@ -90,7 +90,6 @@ const signupDB = (nick, email, password, confirmPassword) => {
           })
         );
         history.push("/login");
-        window.alert("데베 성공");
       })
       .catch((error) => {
         console.log("DB ERROR", error);
