@@ -1,13 +1,13 @@
-import React, { useEffect } from 'react';
+import React, { useEffect } from "react";
 import Post from "../components/Post";
-import Banner from "../shared/img/wish1.jpg"
-import { Button, Grid,Image } from "../elements";
+import Banner from "../shared/img/wish1.jpg";
+import { Button, Grid, Image } from "../elements";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
-import { actionCreators as postCreators  } from '../redux/modules/post'
-
+import { actionCreators as postCreators } from "../redux/modules/post";
 
 const PostList = (props) => {
+
     const dispatch = useDispatch();
     const {history} = props;
     const post_list = useSelector((state) => state.post.list);
@@ -42,6 +42,7 @@ const PostList = (props) => {
 }
 
 
+
 const GridWrap = styled.div`
   max-width: 1300px;
   margin: auto;
@@ -54,5 +55,4 @@ const PostGrid = styled.div`
   min-width: 250px;
 `;
 
-
-export default PostList
+export default PostList;
