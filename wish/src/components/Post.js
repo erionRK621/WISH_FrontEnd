@@ -1,8 +1,6 @@
 import React from "react";
 import { Grid, Text, Image, Button } from "../elements";
 import styled from "styled-components";
-import EditIcon from "@mui/icons-material/Edit";
-import DeleteIcon from "@mui/icons-material/Delete";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { history } from "../redux/configureStore";
 import { actionCreators as deleteActions } from "../redux/modules/postWrite";
@@ -12,7 +10,18 @@ import { useSelector, useDispatch } from "react-redux";
 const Post = (props) => {
   const dispatch = useDispatch();
   const { image_url, user_profile, insert_dt } = props;
-  const post_list = useSelector((state) => state.postWrite.list);
+  const post_list = useSelector((state) => state.post.list);
+  console.log(post_list);
+
+  // const deletePost = () => {
+  //   if(window.confirm("정말 삭제하시겠습니까?")) {
+  //     dispatch(deleteActions.deletePostDB(post_id))
+  //     window.alert("삭제되엇습니다.");
+  //     history.replace("/");
+  //   } else {
+  //     return;
+  //   }
+  // }
 
   // const deletePost = () => {
   //   dispatch(deleteActions.deletePostDB(contents));
@@ -27,16 +36,7 @@ const Post = (props) => {
             <Image shape="circle" src={user_profile} />
             <Text bold>{props.user_info.user_name}</Text>
           </Profile>
-          <div>
-            <EditIcon
-              onClick={() => {
-                history.push("/write");
-              }}
-            >
-              수정
-            </EditIcon>
-            <DeleteIcon onClick={() => {}}>삭제</DeleteIcon>
-          </div>
+          
         </Grid>
         <Grid>
           <Image shape="rectangle" src={image_url} />
