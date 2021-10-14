@@ -2,6 +2,8 @@ import React from "react";
 import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
 import { apis } from "../../shared/api";
+import instance from "../../lib/axios";
+
 //import { getCookie } from "../../shared/Cookie";
 
 //axios
@@ -105,22 +107,40 @@ const addComments = (post_id, comment_text) => {
 //   comment: "",
 //   insert_dt: moment().format("YYYY-MM-DD hh:mm:ss"),
 // };
+
 //미들웨어 함수
+//댓글 불러오기
+const getCommentListDB = () => {
+  return (dispatch) => {
+    apis
+      .getComment()
+      .then((res) => {
+        console.log(res);
+        console.log(res.data);
+        const commentList = res.data.comment;
+        dispatch(setComment(commentList));
+      })
+      .catch((error) => {
+        window.alert("댓글을 불러오는데 실패하였습니다.");
+        console.error(error);
+      });
+  };
+};
+
 //댓글작성
-// const getCommentList = () => {
-//   return (dispatch) => {
-//     apis
-//       .getComment()
-//       .then((res) => {
-//         const commentList = res.data.comment;
-//         dispatch(loadComment(commentList));
-//       })
-//       .catch((error) => {
-//         window.alert("댓글을 불러오는데 실패하였습니다.");
-//         console.error(error);
-//       });
-//   };
-// };
+const addCommentDB = (comment, _id) => {
+  apis
+    .addComment(
+      {
+        _id: _id,
+        comment: comment,
+      },
+      { withCredentials: true }
+    )
+    .then((response) => {
+      window.alert(response.data.msg);
+    });
+};
 
 // const postComment = (comment, user_id) => {
 //   if (user_id === getCookie("user")) {
@@ -183,6 +203,8 @@ export default handleActions(
 const actionCreators = {
   setComment,
   addComments,
+  addCommentDB,
+  getCommentListDB,
 };
 
 export { actionCreators };

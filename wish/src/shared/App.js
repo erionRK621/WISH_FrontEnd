@@ -24,7 +24,6 @@ function App() {
   // window.localStorage.removeItem("token"); 이건 로그아웃 할때
 
   // 토큰 큰따옴표 제거 함수 shared 안에 Token.js 에서 가져옵니다.
-  console.log(getToken());
 
   // console.log("트루냐 펄스냐", is_token);
   React.useEffect(() => {
