@@ -3,16 +3,17 @@ import React from "react";
 import { Text, Button, Grid, Input } from "../elements/index";
 import { useSelector, useDispatch } from "react-redux";
 import { actionCreators as userActions } from "../redux/modules/user";
+import { history } from "../redux/configureStore";
 
 const Login = () => {
   const dispatch = useDispatch();
   const [email, setEmail] = React.useState();
   const [pwd, setPwd] = React.useState();
   const user = useSelector((state) => state.user);
-  console.log(
-    "사용자",
-    useSelector((state) => state.user)
-  );
+  // console.log(
+  //   "사용자",
+  //   useSelector((state) => state.user)
+  // );
 
   const login = () => {
     if (email === "" || pwd === "") {
@@ -65,6 +66,13 @@ const Login = () => {
             login();
           }}
         ></Button>
+
+        <a
+          href="http://3.35.235.79/kakao
+        "
+        >
+          카카오톡으로 로그인하기
+        </a>
       </Grid>
     </React.Fragment>
   );

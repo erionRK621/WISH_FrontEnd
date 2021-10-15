@@ -3,9 +3,8 @@ import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
 import "moment";
 import moment from "moment";
-import {apis} from '../../shared/api'
-import instance from '../../lib/axios'
-
+import { apis } from "../../shared/api";
+import instance from "../../lib/axios";
 
 // 액션타입생성(리듀서 작성시 재사용되기 때문에 액션타입을 지정하는것임)
 const SET_POST = "SET_POST";
@@ -26,22 +25,7 @@ const addPost = createAction(ADD_POST, (post) => ({ post }));
 const setPreview = createAction(SET_PREVIEW, (preview) => ({ preview }));
 //초기상태값
 const initialState = {
-  list: [
-    {
-      user_info: {
-        id: 0,
-        user_name: "wish",
-        user_profile:
-          "https://images.unsplash.com/photo-1540331547168-8b63109225b7?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=719&q=80",
-      },
-      image_url:
-        "https://images.unsplash.com/photo-1581235720704-06d3acfcb36f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=880&q=80",
-      contents: "",
-      like_cnt: 0,
-      comment_cnt: 10,
-      insert_dt: moment().format("YYYY-MM-DD hh:mm:ss"),
-    },
-  ],
+  list: [],
 };
 
 //게시글하나에 들어가야할 기본내용
@@ -60,30 +44,26 @@ const initialPost = {
   insert_dt: moment().format("YYYY-MM-DD hh:mm:ss"),
 };
 
-
 //미들웨어
 //메인페이지 게시글 가져오기
 const getPostDB = () => {
   return function (dispatch, getState, { history }) {
     apis
-    .getPost()
+      .getPost()
       .then((res) => {
         console.log(res);
         console.log(res.data);
-        if(res.data.token){
-          window.localStorage.setItem(
-            "token",
-            JSON.stringify(res.data.token)
-          );
-        }        
+        if (res.data.token) {
+          window.localStorage.setItem("token", JSON.stringify(res.data.token));
+        }
         dispatch(setPost(res.data));
-      }).catch(err => {
-        //요청이 정상적으로 안됬을때 수행
-        console.log(err,"에러")
       })
-
-  }
-}
+      .catch((err) => {
+        //요청이 정상적으로 안됬을때 수행
+        console.log(err, "에러");
+      });
+  };
+};
 
 // const addPostDB = () => {
 //   return function (dispatch, getState, { history }) {
@@ -110,16 +90,16 @@ const getPostDB = () => {
 const deletePostDB = (post_id) => {
   return function (dispatch, getState, { history }) {
     apis
-    .deletePost()
-    .then((res) => {
-      console.log(res)
-      dispatch(deletePost(post_id));
-    }).catch((err) =>{
-      console.log("삭제에러", err)
-    })
-  }
-}
-
+      .deletePost()
+      .then((res) => {
+        console.log(res);
+        dispatch(deletePost(post_id));
+      })
+      .catch((err) => {
+        console.log("삭제에러", err);
+      });
+  };
+};
 
 // 리듀서
 export default handleActions(
@@ -127,7 +107,7 @@ export default handleActions(
     [SET_POST]: (state, action) =>
       produce(state, (draft) => {
         // undifined는 값이 잘넘어가고있다. 값이 나올경우 어딘가에 문제가 있는것
-        console.log(action.payload.postings);
+        console.log(action.payload);
         draft.list.push(...action.payload.post_list.postings);
 
         // draft.list = draft.list.reduce((acc, cur) => {
@@ -158,13 +138,9 @@ export default handleActions(
       }),
     [DELETE_POST]: (state, action) =>
       produce(state, (draft) => {
-        
-        let new_post_list = draft.list
-        
-        
-        
-        // let idx = draft.list.findIndex((p) => p.id === action.payload.post_id);
+        let new_post_list = draft.list;
 
+        // let idx = draft.list.findIndex((p) => p.id === action.payload.post_id);
 
         // if (idx !== -1) {
         //   // 배열에서 idx 위치의 요소 1개를 지움

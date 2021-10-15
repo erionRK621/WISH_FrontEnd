@@ -11,11 +11,9 @@ const Post = (props) => {
   const post_list = useSelector((state) => state.post.list);
   console.log(post_list);
 
-
   // const deletePost = () => {
   //   dispatch(deleteActions.deletePostDB(contents));
   // };
-  
 
   return (
     <PostContainer>
@@ -25,10 +23,12 @@ const Post = (props) => {
             <Image shape="circle" src={user_profile} />
             <Text bold>{props.user_info.user_name}</Text>
           </Profile>
-          
         </Grid>
         <Grid>
-          <Image shape="rectangle" src={props.imageUrl} />
+          <Image
+            shape="rectangle"
+            src={`http://3.35.235.79/${props.imageUrl}`}
+          />
         </Grid>
         <Grid is_flex>
           <Text>{props.content}</Text>

@@ -21,7 +21,8 @@ export const apis = {
 
   getComment: () => instance.get("/api/postings/:postingId/comments"),
   // 댓글 불러오기
-  addComment: (comment, post_id) => instance.post("/api/comment", comment, post_id),
+  addComment: (comment, post_id) =>
+    instance.post("/api/comment", comment, post_id),
   // 댓글 등록하기
 
   // Signup(): () => instance.post("/signup")

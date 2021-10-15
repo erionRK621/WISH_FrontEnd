@@ -17,19 +17,22 @@ import CommentList from "../components/CommentList";
 import Login from "../pages/Login";
 import Signup from "../pages/Signup";
 import getToken from "./Token";
+import { actionCreators as userActions } from "../redux/modules/user";
 
 function App() {
-  const is_token = window.localStorage.getItem("token") ? true : false;
+  const is_token = window.localStorage.getItem("token") ? false : false;
+  const dispatch = useDispatch();
 
   // window.localStorage.removeItem("token"); 이건 로그아웃 할때
 
   // 토큰 큰따옴표 제거 함수 shared 안에 Token.js 에서 가져옵니다.
-  console.log(getToken());
 
   // console.log("트루냐 펄스냐", is_token);
+
   React.useEffect(() => {
     if (is_token) {
       //유저 정보 받아오는 미들웨어 실행
+      dispatch(userActions.getUserDB());
     }
   }, []);
 
@@ -37,6 +40,7 @@ function App() {
     <React.Fragment>
       <Grid>
         <Header></Header>
+
         <ConnectedRouter history={history}>
           <Switch>
             <Route path="/" exact component={PostList}></Route>
