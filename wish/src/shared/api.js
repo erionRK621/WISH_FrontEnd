@@ -20,8 +20,16 @@ export const apis = {
   // 게시물 수정하기
   deletePost: (postingId) => instance.delete(`/api/postings/${postingId}`),
   // 게시물 삭제하기
+
+  getMyPost: (id) => instance.get(`/api/users/${id}`),
+
+
   getComment: (post_id) => {
-    return instance.get(`/api/postings/${post_id}/comments`);
+    return instance.get(`/api/postings/${post_id}/comments`, {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    });
   },
   // 댓글 불러오기  파라미터 이름은 중요하지않고 주소와 같기만 하면 됨
   addComment: (comment, post_id) =>

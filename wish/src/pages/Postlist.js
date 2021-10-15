@@ -7,43 +7,37 @@ import { useSelector, useDispatch } from "react-redux";
 import { actionCreators as postCreators } from "../redux/modules/post";
 
 const PostList = (props) => {
+  const dispatch = useDispatch();
+  const { history } = props;
+  //포스트리스트값 불러오기
+  const post_list = useSelector((state) => state.post.list);
+  // const user_info = useSelector((state) => state.user);
 
-    const dispatch = useDispatch();
-    const {history} = props;
-    //포스트리스트값 불러오기
-    const post_list = useSelector((state) => state.post.list);
-    // const user_info = useSelector((state) => state.user);
-    
-    // console.log(user_info);
+  // console.log(user_info);
 
-    useEffect(() => {
-      dispatch(postCreators.getPostDB());
-    }, []);
-    console.log("renders")
+  useEffect(() => {
+    dispatch(postCreators.getPostDB());
+  }, []);
+  console.log("renders");
 
-    console.log(post_list);
-    return (
-      <>
+  console.log(post_list);
+  return (
+    <>
       <Image shape="main" src={Banner} style={{ position: "absolute" }} />
-        <Grid>
-          
-            <GridWrap>
-            {post_list.map((p,idx) => {
-                    return <Grid
-                    key={idx}
-                    _onClick={() => {
-                      history.push(`/post/${p._id}`);
-                    }}
-                    ><Post key={idx} {...p}/></Grid>
-                })}
-               
-            </GridWrap>
-        </Grid>
-        </>
-    )
-}
-
-
+      <Grid>
+        <GridWrap>
+          {post_list.map((p, idx) => {
+            return (
+              <Grid key={idx}>
+                <Post key={idx} {...p} />
+              </Grid>
+            );
+          })}
+        </GridWrap>
+      </Grid>
+    </>
+  );
+};
 
 const GridWrap = styled.div`
   max-width: 1300px;

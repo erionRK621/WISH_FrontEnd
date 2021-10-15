@@ -15,19 +15,24 @@ import CommentWrite from "../components/CommentWrite";
 const PostDetail = (props) => {
   const dispatch = useDispatch();
   let post_id = props.match.params.id;
+<<<<<<< HEAD
   const post_list = useSelector((state) => state.post.list)
   console.log(post_list)
   let _post = post_list.find((p) => p.id === post_id)
   console.log(_post)
+=======
+
+
+  const post_list = useSelector((state) => state.post.list);
+
+>>>>>>> 3bc9ccadc15dc4ee9421d53994cf95646a3cec0c
   console.log(props);
 
-  
   console.log(post_list);
-  
-  
+
+
   const deletePost = () => {
     if (window.confirm("정말 삭제하시겠습니까?")) {
-      
       dispatch(deleteActions.deletePostDB(post_id));
       window.alert("삭제되엇습니다.");
       history.replace("/");
@@ -37,13 +42,15 @@ const PostDetail = (props) => {
   };
 
   const editPost = () => {
-    history.push("/edit/"+ post_id);
-  }
+    history.push("/edit/" + post_id);
+  };
+
+
 
   React.useEffect(() => {
     dispatch(onePostCreators.getOnePostDB(post_id));
   }, []);
-  
+
 
   return (
     <>

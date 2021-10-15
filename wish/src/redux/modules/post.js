@@ -13,7 +13,7 @@ const SET_POST = "SET_POST";
 const EDIT_POST = "EDIT_POST";
 const DELETE_POST = "DELETE_POST";
 const SET_PREVIEW = "SET_PREVIEW";
-const ONE_POST = "ONE_POST"
+const ONE_POST = "ONE_POST";
 const LIKE_TOGGLE = "LIKE_TOGGLE";
 const LOADING = "LOADING";
 
@@ -24,7 +24,11 @@ const setPost = createAction(SET_POST, (post_list) => ({ post_list }));
 const editPost = createAction(EDIT_POST, (post_id) => ({ post_id }));
 const deletePost = createAction(DELETE_POST, (post_id) => ({ post_id }));
 const setPreview = createAction(SET_PREVIEW, (preview) => ({ preview }));
+
+const likeToggle = createAction(LIKE_TOGGLE, (like) => ({ like }));
+
 const onePost = createAction(ONE_POST, (post) => ({ post }));
+
 //초기상태값
 const initialState = {
   list: [],
@@ -78,7 +82,6 @@ const editPostDB = (post_id, contents = "") => {
       .patch(
         `http://3.35.235.79/api/postings/${post_id}`,
         {
-
           text: contents,
         },
         {
@@ -89,8 +92,8 @@ const editPostDB = (post_id, contents = "") => {
       )
       .then((res) => {
         console.log(res);
-        if(res){
-          window.alert("수정이 완료되었습니다!")
+        if (res) {
+          window.alert("수정이 완료되었습니다!");
           document.location.href = "/";
         }
       })
@@ -103,8 +106,8 @@ const editPostDB = (post_id, contents = "") => {
 //게시글 DB에서 삭제
 const deletePostDB = (post_id) => {
   return function (dispatch, getState, { history }) {
-    console.log(post_id)
-    const token = getToken()
+    console.log(post_id);
+    const token = getToken();
     console.log(token);
     axios
       .delete(`http://3.35.235.79/api/postings/${post_id}`, {
@@ -125,11 +128,33 @@ const deletePostDB = (post_id) => {
 //상세페이지 포스트값 조회
 const getOnePostDB = (post_id) => {
   return function (dispatch, getState, { history }) {
-    console.log(post_id)
-    const token = getToken()
+    console.log(post_id);
+    const token = getToken();
     console.log(token);
     axios
       .get(`http://3.35.235.79/api/postings/${post_id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => {
+        console.log("리스폰쓰", res.data.likeCount);
+        dispatch(likeToggle(res.data.likeCount));
+      })
+      .catch((err) => {
+        console.log("좋아요 에러", err);
+      });
+  };
+};
+
+//포스트 좋아요 토글
+const LikeDB = (post_id) => {
+  return function (dispatch, getState, { history }) {
+    console.log(post_id);
+    const token = getToken();
+    console.log(token);
+    axios
+      .post(`http://3.35.235.79/api/postings/${post_id}/like`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -143,31 +168,6 @@ const getOnePostDB = (post_id) => {
       });
   };
 };
-
-//포스트 좋아요 토글
-const LikeDB = (post_id) => {
-  return function (dispatch, getState, { history }) {
-    console.log(post_id);
-    const token = getToken();
-    console.log(token);
-    axios
-    .post(
-      `http://3.35.235.79/api/postings/${post_id}/like`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-    )
-    .then((res) => {
-      console.log(res)
-      dispatch(deletePost(post_id));
-    }).catch((err) =>{
-      console.log("삭제에러", err)
-    })
-  }
-}
-
 
 // 리듀서
 export default handleActions(
@@ -209,7 +209,7 @@ export default handleActions(
       }),
     [DELETE_POST]: (state, action) =>
       produce(state, (draft) => {
-         // 받아온 id값과 맞지 않는 id의 데이터들을 새로운 배열에 넣어서 기존 list에 덮어쓰기
+        // 받아온 id값과 맞지 않는 id의 데이터들을 새로운 배열에 넣어서 기존 list에 덮어쓰기
         let new_post_list = draft.list.filter((p) => {
           if (p.id !== action.payload.post) {
             return p;
@@ -226,16 +226,17 @@ export default handleActions(
         //   // 배열에서 idx 위치의 요소 1개를 지움
         //   draft.list.splice(idx, 1);
         // }
-
-        
       }),
-      [ONE_POST]: (state, action) =>
+    [ONE_POST]: (state, action) =>
       produce(state, (draft) => {
-
-        console.log(action.payload)
+        console.log(action.payload);
         // 배열의 몇 번째에 있는 지 찾습니다.
         draft.list.unshift(action.payload.post);
-
+      }),
+    [LIKE_TOGGLE]: (state, action) =>
+      produce(state, (draft) => {
+        console.log("여기가 action", action.payload.like);
+        draft.like = action.payload.like;
       }),
   },
   initialState
