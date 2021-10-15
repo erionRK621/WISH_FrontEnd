@@ -3,6 +3,8 @@ import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
 import { apis } from "../../shared/api";
 import instance from "../../lib/axios";
+import axios from "axios";
+import getToken from "../../shared/Token";
 
 //import { getCookie } from "../../shared/Cookie";
 
@@ -110,10 +112,18 @@ const addComments = (post_id, comment_text) => {
 
 //미들웨어 함수
 //댓글 불러오기
-const getCommentListDB = () => {
+const getCommentListDB = (post_id) => {
   return (dispatch) => {
-    apis
-      .getComment()
+    const token = getToken()
+    axios
+    .get(
+      `http://3.35.235.79/api/postings/${post_id}/comments`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+    )
       .then((res) => {
         console.log(res);
         console.log(res.data);
@@ -182,7 +192,13 @@ const addCommentDB = (comment, _id) => {
 
 export default handleActions(
   {
-    [SET_COMMENT]: (state, action) => produce(state, (draft) => {}),
+    [SET_COMMENT]: (state, action) => 
+    produce(state, (draft) => {
+      console.log(action.payload.comment);
+      console.log(action.payload.comment);
+      draft.list = action.payload.comment
+    }),
+    
     [ADD_COMMENT]: (state, action) =>
       produce(state, (draft) => {
         console.log("여기 action", action);

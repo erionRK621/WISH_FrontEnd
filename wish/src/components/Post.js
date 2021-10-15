@@ -12,6 +12,7 @@ const Post = (props) => {
   console.log(post_list);
 
 
+
   // const deletePost = () => {
   //   dispatch(deleteActions.deletePostDB(contents));
   // };
@@ -23,16 +24,16 @@ const Post = (props) => {
         <Grid is_flex>
           <Profile>
             <Image shape="circle" src={user_profile} />
-            <Text bold>{props.user_info.user_name}</Text>
+            <Text bold>{props.authorName}</Text>
           </Profile>
           
         </Grid>
         <Grid>
-          <Image shape="rectangle" src={props.imageUrl} />
+          <Image shape="rectangle" src={`http://3.35.235.79/${props.imageUrl}`} />
         </Grid>
         <Grid is_flex>
-          <Text>{props.content}</Text>
-          <Text>{props.insert_dt}</Text>
+          <Text>{props.text}</Text>
+          <Text>{props.createdAt}</Text>
         </Grid>
         <Grid is_flex>
           <Text bold>댓글{props.comment_cnt}개 모두보기</Text>

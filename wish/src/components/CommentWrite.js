@@ -1,12 +1,15 @@
 import React, { useEffect } from "react";
 import { Grid, Input, Button } from "../elements";
 
+
 import { actionCreators as commentActions } from "../redux/modules/comment";
 import { useDispatch, useSelector } from "react-redux";
 
 const CommentWrite = (props) => {
   const dispatch = useDispatch();
   const [comment_text, setCommentText] = React.useState();
+  console.log(props)
+  console.log(props.match)
 
   const { post_id } = props;
   console.log(post_id);
