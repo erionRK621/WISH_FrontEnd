@@ -15,8 +15,11 @@ import { history } from "../redux/configureStore";
 const Post = (props) => {
   const dispatch = useDispatch();
 
-  const like = useSelector((state) => state.post.like);
-  console.log(like);
+  const like = props.Like.length;
+
+  // console.log(like);
+
+  // console.log(props.Like.length);
 
   const setLike = () => {
     dispatch(setLikeAction.LikeDB(props._id));
@@ -49,7 +52,7 @@ const Post = (props) => {
           <Text>{props.createdAt}</Text>
         </Grid>
         <Grid is_flex>
-          <Text bold>댓글{props.comment_cnt}개 모두보기</Text>
+          <Text bold>댓글{props.comment_cnt}개</Text>
 
           <FavoriteBorderIcon onClick={setLike}></FavoriteBorderIcon>
           <FavoriteIcon onClick={setLike}></FavoriteIcon>
