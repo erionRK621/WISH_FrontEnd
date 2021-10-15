@@ -27,13 +27,12 @@ const CommentWrite = (props) => {
   const [comment_text, setCommentText] = React.useState("");
   console.log(comment_text);
 
-  const write = (comment_text) => {
+  const write = () => {
     const comment = {
       comment_text,
-      user_name,
       post_id,
-      insert_dt,
     };
+
     dispatch(commentActions.addCommentDB(comment));
     setCommentText("");
   };

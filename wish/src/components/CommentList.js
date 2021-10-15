@@ -3,8 +3,8 @@ import { Image, Text, Grid } from "../elements";
 import { actionCreators as commentCreators } from "../redux/modules/comment";
 import { useSelector, useDispatch } from "react-redux";
 import { useLocation } from "react-router";
+import { getCommentDB } from "../redux/modules/comment";
 import { commentActions } from "../redux/modules/comment";
-
 
 const CommentList = (props) => {
   const location = useLocation();
@@ -12,7 +12,7 @@ const CommentList = (props) => {
   const comment_list = useSelector((state) => state.comment.list);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(commentCreators.getCommentMiddleware(post_id));
+    dispatch(getCommentDB(post_id));
   }, []);
 
   return (

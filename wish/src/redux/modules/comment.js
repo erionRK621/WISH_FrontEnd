@@ -29,10 +29,11 @@ const initialState = {
   is_loading: false,
 };
 
-const getCommentDB = () => {
-  return (dispatch) => {
+//미들웨어 함수
+export const getCommentDB = (postId) => {
+  return (dispatch, getState) => {
     apis
-      .getComment()
+      .getComment(postId)
       .then((res) => {
         console.log(res);
         console.log(res.data);
@@ -46,14 +47,12 @@ const getCommentDB = () => {
   };
 };
 
-const addCommentDB = (_comment) => {
+export const addCommentDB = (_comment) => {
   return function (dispatch, getState, { history }) {
     // (commentUserId, commentDesc, postId)
     apis.addComment(_comment.comment_text, _comment.post_id).then((res) => {
-      const comment = {
-        ..._comment,
-      };
-      dispatch(addComment(comment));
+      console.log(res);
+      // dispatch(addComment(comment));
     });
   };
 };
