@@ -8,6 +8,7 @@ import { produce } from "immer";
 // 셋째, 쿠키를 가져온다.
 import { setCookie, getCookie, deleteCookie } from "../../shared/Cookie";
 import axios from "axios";
+import getToken from "../../shared/Token";
 
 // 2. actions(액션타입)
 // 첫째, 로그인 정보를 가지고 온다.
@@ -41,6 +42,27 @@ const user_intial = {
     "https://images.unsplash.com/photo-1540331547168-8b63109225b7?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=719&q=80",
 };
 
+const getUserDB = () => {
+  return function (dispatch, getState, { history }) {
+    const token = getToken();
+
+    axios
+      .get("http://3.35.235.79/api/users/me", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        dispatch(
+          getUser({
+            nick: response.data.nick,
+            email: response.data.email,
+          })
+        );
+      });
+  };
+};
+
 const loginDB = (email, password) => {
   return function (dispatch, getState, { history }) {
     axios
@@ -53,7 +75,7 @@ const loginDB = (email, password) => {
         dispatch(
           logIn({
             token: response.data.token,
-            is_login : true,
+            is_login: true,
           })
         );
         window.localStorage.setItem(
@@ -103,9 +125,6 @@ export default handleActions(
   {
     [LOG_IN]: (state, action) =>
       produce(state, (draft) => {
-        console.log("여기", action);
-        console.log("여기", action.payload.user);
-        console.log("이것은 draft", draft);
         draft.token = action.payload.user.token;
         draft.is_login = action.payload.user.is_login;
       }),
@@ -117,12 +136,21 @@ export default handleActions(
         draft.password = action.payload.user.password;
         draft.user_profile = user_intial.user_profile;
       }),
-    // [LOG_OUT]: (state, action) =>
-    //   produce(state, (draft) => {
-    //     deleteCookie("is_login");
-    //     draft.user = null;
-    //     draft.is_login = false;
-    //   }),
+
+    [GET_USER]: (state, action) =>
+      produce(state, (draft) => {
+        // console.log("여기", action);
+        // console.log("여기", action.payload.user);
+        // console.log("이것은 draft", draft);
+        draft.nick = action.payload.user.nick;
+        draft.email = action.payload.user.email;
+        draft.is_login = true;
+      }),
+
+    [LOG_OUT]: (state, action) =>
+      produce(state, (draft) => {
+        draft.is_login = false;
+      }),
     // [GET_USER]: (state, action) => produce(state, (draft) => {}),
   },
   user_intial
@@ -133,6 +161,8 @@ export default handleActions(
 const actionCreators = {
   signupDB,
   loginDB,
+  getUserDB,
+  logOut,
 };
 
 export { actionCreators };

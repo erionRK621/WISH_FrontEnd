@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { Grid, Input, Button } from "../elements";
 
-
 import { actionCreators as commentActions } from "../redux/modules/comment";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router";
@@ -10,9 +9,8 @@ const CommentWrite = (props) => {
   const location = useLocation();
   const dispatch = useDispatch();
   const [comment_text, setCommentText] = React.useState();
-  console.log(props)
-  console.log(props.match)
-
+  console.log(props);
+  console.log(props.match);
 
   const post_id = location.pathname.split("/")[2];
 
@@ -27,7 +25,6 @@ const CommentWrite = (props) => {
     setCommentText(e.target.value);
   };
 
-  const [comment_text, setCommentText] = React.useState("");
   console.log(comment_text);
 
   const write = () => {
