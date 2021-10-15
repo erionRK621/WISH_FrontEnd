@@ -1,5 +1,7 @@
 import React from "react";
 import { Grid, Text, Image, Button } from "../elements";
+import "moment";
+import moment from "moment";
 import styled from "styled-components";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 
@@ -8,10 +10,15 @@ import { actionCreators as setLikeAction } from "../redux/modules/comment";
 
 const Post = (props) => {
   const dispatch = useDispatch();
-  const { image_url, user_profile, insert_dt } = props;
-  const post_list = useSelector((state) => state.post.list);
+  // const { image_url, user_profile, insert_dt } = props;
+  // const post_list = useSelector((state) => state.post.list);
+  // console.log(props);
+  // let _postingDate = props.createdAt.substr(0.10);
+  // let postingDate = moment(_postingDate).format('YYYY년 MM월 DD일');
   // let post_id = props.match.params.id;
-  console.log(props.imageUrl);
+  // console.log(post_list);
+  // console.log(postingDate);
+  
 
   const setLike = () => {
     dispatch(setLikeAction.LikeDB());
@@ -26,7 +33,7 @@ const Post = (props) => {
       <Grid padding="16px" bg="#ffffff" margin="8px 0px">
         <Grid is_flex>
           <Profile>
-            <Image shape="circle" src={user_profile} />
+            <Image shape="circle" src={props.user_profile} />
             <Text bold>{props.authorName}</Text>
           </Profile>
         </Grid>

@@ -9,7 +9,6 @@ import getToken from "../../shared/Token";
 
 //import { getCookie } from "../../shared/Cookie";
 
-
 //axios
 import moment from "moment";
 //쿠키
@@ -42,9 +41,8 @@ export const getCommentDB = (postId) => {
     apis
       .getComment(postId)
       .then((res) => {
-        console.log(res);
-        console.log(res.data);
-        const commentList = res.data.comment;
+        console.log("!!!!!!!!!", res);
+        const commentList = res.data.allComments;
         dispatch(getComment(commentList));
       })
       .catch((error) => {
@@ -57,10 +55,15 @@ export const getCommentDB = (postId) => {
 export const addCommentDB = (_comment) => {
   return function (dispatch, getState, { history }) {
     // (commentUserId, commentDesc, postId)
-    apis.addComment(_comment.comment_text, _comment.post_id).then((res) => {
-      console.log(res);
-      // dispatch(addComment(comment));
-    });
+    apis
+      .addComment(_comment.comment_text, _comment.post_id)
+      .then((res) => {
+        console.log("내가 받아온 값이여");
+        // dispatch(addComment(comment));
+      })
+      .catch((err) => {
+        console.log("add 에러", err);
+      });
   };
 };
 
@@ -81,13 +84,13 @@ export const addCommentDB = (_comment) => {
 //리듀서
 export default handleActions(
   {
-
     [GET_COMMENT]: (state, action) =>
       produce(state, (draft) => {
         draft.list = action.payload.comment_list;
       }),
     [ADD_COMMENT]: (state, action) =>
       produce(state, (draft) => {
+        console.log("action.payload!!!", action.payload);
         draft.list.unshift(action.payload.comment);
       }),
 
