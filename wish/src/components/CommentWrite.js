@@ -10,7 +10,6 @@ const CommentWrite = (props) => {
   const dispatch = useDispatch();
 
   const post_id = location.pathname.split("/")[2];
-  console.log(post_id);
 
   //comment list 가져오기
   //const comment = useSelector((state) => state.comment.list);
@@ -20,7 +19,6 @@ const CommentWrite = (props) => {
   // }, []);
 
   const onChange = (e) => {
-    console.log(e.target.value);
     setCommentText(e.target.value);
   };
 
