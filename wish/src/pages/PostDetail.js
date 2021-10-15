@@ -18,6 +18,7 @@ import CommentWrite from "../components/CommentWrite";
 const PostDetail = (props) => {
   const dispatch = useDispatch();
   let post_id = props.match.params.id;
+
   const post_list = useSelector((state) => state.post.list);
   console.log(post_list);
 
@@ -35,6 +36,7 @@ const PostDetail = (props) => {
 
   console.log(post_list);
 
+
   const deletePost = () => {
     if (window.confirm("정말 삭제하시겠습니까?")) {
       dispatch(deleteActions.deletePostDB(post_id));
@@ -48,6 +50,7 @@ const PostDetail = (props) => {
   const editPost = () => {
     history.push("/edit/" + post_id);
   };
+
 
   return (
     <>
