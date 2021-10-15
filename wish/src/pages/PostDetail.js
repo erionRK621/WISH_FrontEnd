@@ -18,13 +18,10 @@ import CommentWrite from "../components/CommentWrite";
 const PostDetail = (props) => {
   const dispatch = useDispatch();
   let post_id = props.match.params.id;
-
   const post_list = useSelector((state) => state.post.list);
   console.log(post_list);
 
   let _post = post_list.find((p) => p._id === post_id);
-  let _postingDate = _post.createdAt.substr(0.1);
-  let postingDate = moment(_postingDate).format("YYYY년 MM월 DD일");
 
   console.log(_post);
   console.log(_post._id);
@@ -35,7 +32,6 @@ const PostDetail = (props) => {
   console.log(props);
 
   console.log(post_list);
-
 
   const deletePost = () => {
     if (window.confirm("정말 삭제하시겠습니까?")) {
@@ -51,7 +47,6 @@ const PostDetail = (props) => {
     history.push("/edit/" + post_id);
   };
 
-
   return (
     <>
       <div>
@@ -62,7 +57,7 @@ const PostDetail = (props) => {
                 <Image shape="circle" src={props.user_profile} />
                 <Text bold>{_post.authorName}</Text>
               </Profile>
-              <Text>{postingDate}</Text>
+              <Text>{_post.createdAt}</Text>
             </Grid>
             <Grid>
               <Image
