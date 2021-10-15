@@ -16,11 +16,13 @@ const PostDetail = (props) => {
   const dispatch = useDispatch();
   let post_id = props.match.params.id;
 
+
   const post_list = useSelector((state) => state.post.list);
 
   console.log(props);
 
   console.log(post_list);
+
 
   const deletePost = () => {
     if (window.confirm("정말 삭제하시겠습니까?")) {
@@ -36,9 +38,12 @@ const PostDetail = (props) => {
     history.push("/edit/" + post_id);
   };
 
+
+
   React.useEffect(() => {
     dispatch(onePostCreators.getOnePostDB(post_id));
   }, []);
+
 
   return (
     <>
