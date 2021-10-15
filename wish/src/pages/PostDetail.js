@@ -13,9 +13,11 @@ import CommentWrite from "../components/CommentWrite";
 
 const PostDetail = (props) => {
   const dispatch = useDispatch();
-  const post_id = props.match.params.id;
+  let post_id = props.match.params.id;
+  
   const deletePost = () => {
     if (window.confirm("정말 삭제하시겠습니까?")) {
+      
       dispatch(deleteActions.deletePostDB(post_id));
       window.alert("삭제되엇습니다.");
       history.replace("/");
@@ -24,19 +26,22 @@ const PostDetail = (props) => {
     }
   };
 
-  console.log(post_id);
+  const editPost = () => {
+    history.push("/edit/"+ post_id);
+  }
+  
 
   return (
     <>
       <div>
         <Post />
         <Grid is_flex>
-          <Button text="수정" _onClick={deletePost} />
+          <Button text="수정" _onClick={editPost} />
           <Button text="삭제" _onClick={deletePost} />
         </Grid>
         <div style={{ textAlign: "center" }}>
-          <CommentWrite />
-          <CommentList />
+          {/* <CommentWrite />
+          <CommentList /> */}
         </div>
       </div>
     </>

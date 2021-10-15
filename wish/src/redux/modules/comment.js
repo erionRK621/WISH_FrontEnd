@@ -3,6 +3,13 @@ import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
 import { apis } from "../../shared/api";
 
+import instance from "../../lib/axios";
+import axios from "axios";
+import getToken from "../../shared/Token";
+
+//import { getCookie } from "../../shared/Cookie";
+
+
 //axios
 import moment from "moment";
 //쿠키
@@ -74,6 +81,7 @@ export const addCommentDB = (_comment) => {
 //리듀서
 export default handleActions(
   {
+
     [GET_COMMENT]: (state, action) =>
       produce(state, (draft) => {
         draft.list = action.payload.comment_list;
