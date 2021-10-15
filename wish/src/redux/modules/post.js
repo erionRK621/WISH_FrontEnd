@@ -154,17 +154,21 @@ const LikeDB = (post_id) => {
     const token = getToken();
     console.log(token);
     axios
-      .post(`http://3.35.235.79/api/postings/${post_id}/like`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
+      .post(
+        `http://3.35.235.79/api/postings/${post_id}/like`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
       .then((res) => {
-        console.log(res);
-        dispatch(deletePost(post_id));
+        console.log("리스폰쓰", res.data.likeCount);
+        dispatch(likeToggle(res.data.likeCount));
       })
       .catch((err) => {
-        console.log("삭제에러", err);
+        console.log("좋아요 에러", err);
       });
   };
 };
