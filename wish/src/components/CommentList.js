@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Image, Text, Grid } from "../elements";
 import { actionCreators as commentCreators } from "../redux/modules/comment";
 import { useSelector, useDispatch } from "react-redux";
+<<<<<<< HEAD
 import { useLocation } from "react-router";
 import { getCommentDB } from "../redux/modules/comment";
 import { commentActions } from "../redux/modules/comment";
@@ -14,6 +15,24 @@ const CommentList = (props) => {
   useEffect(() => {
     dispatch(getCommentDB(post_id));
   }, []);
+=======
+
+import { useLocation } from 'react-router';
+
+const CommentList = (props) => {
+  const dispatch = useDispatch();
+  const location = useLocation();
+  const post_id = location.pathname.split("/")[2];
+  const comment_list = useSelector((state) => state.comment.list);
+  
+  useEffect(() => {
+    dispatch(commentCreators.getCommentListDB(post_id));
+  }, []);
+  console.log("renders")
+
+
+  console.log(props);
+>>>>>>> d8277494992a5451532c91a2ab4bcf906c3d49a8
 
   return (
     <React.Fragment>
@@ -30,32 +49,29 @@ CommentList.defaultProps = {
 
 export default CommentList;
 
-const CommentItem = (props) => {
-  const location = useLocation();
 
-  console.log(props);
+// const CommentItem = (props) => {
+//   const dispatch = useDispatch();
+//   const { user_profile, user_name, user_id, post_id, contents, insert_dt } =
+//     props;
 
-  //props에서 가져온거 넘겨주기
-  const { user_profile, user_name, user_id, post_id, contents, insert_dt } =
-    props;
-  const dispatch = useDispatch();
-  // const deleteComment = () => {
-  //   dispatch(commentActions.deleteCommentMiddleware(commentId));
-  // };
+//   useEffect(() => {
+//     dispatch(commentCreators.getCommentListDB());
+//   }, []);
+//   return (
+//     <Grid is_flex>
+//       <Grid is_flex width="auto">
+//         <Image shape="circle" />
+//         <Text bold>{user_name}</Text>
+//       </Grid>
+//       <Grid is_flex margin="0px 4px">
+//         <Text margin="0px">{contents}</Text>
+//         <Text margin="0px">{insert_dt}</Text>
+//       </Grid>
+//     </Grid>
+//   );
+// };
 
-  return (
-    <Grid is_flex>
-      <Grid is_flex width="auto">
-        <Image shape="circle" />
-        <Text bold>{user_name}</Text>
-      </Grid>
-      <Grid is_flex margin="0px 4px">
-        <Text margin="0px">{contents}</Text>
-        <Text margin="0px">{insert_dt}</Text>
-      </Grid>
-    </Grid>
-  );
-};
 
 // CommentItem.defaultProps = {
 //   user_profile: "",

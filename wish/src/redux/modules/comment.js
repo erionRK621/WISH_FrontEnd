@@ -2,11 +2,19 @@ import React from "react";
 import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
 import { apis } from "../../shared/api";
+<<<<<<< HEAD
+=======
+
+>>>>>>> d8277494992a5451532c91a2ab4bcf906c3d49a8
 import instance from "../../lib/axios";
 import axios from "axios";
 import getToken from "../../shared/Token";
 
 //import { getCookie } from "../../shared/Cookie";
+<<<<<<< HEAD
+=======
+
+>>>>>>> d8277494992a5451532c91a2ab4bcf906c3d49a8
 
 //axios
 import moment from "moment";
