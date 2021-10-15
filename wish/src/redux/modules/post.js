@@ -3,9 +3,8 @@ import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
 import "moment";
 import moment from "moment";
-import {apis} from '../../shared/api'
-import instance from '../../lib/axios'
-
+import { apis } from "../../shared/api";
+import instance from "../../lib/axios";
 
 // 액션타입생성(리듀서 작성시 재사용되기 때문에 액션타입을 지정하는것임)
 const SET_POST = "SET_POST";
@@ -60,30 +59,26 @@ const initialPost = {
   insert_dt: moment().format("YYYY-MM-DD hh:mm:ss"),
 };
 
-
 //미들웨어
 //메인페이지 게시글 가져오기
 const getPostDB = () => {
   return function (dispatch, getState, { history }) {
     apis
-    .getPost()
+      .getPost()
       .then((res) => {
         console.log(res);
         console.log(res.data);
-        if(res.data.token){
-          window.localStorage.setItem(
-            "token",
-            JSON.stringify(res.data.token)
-          );
-        }        
+        if (res.data.token) {
+          window.localStorage.setItem("token", JSON.stringify(res.data.token));
+        }
         dispatch(setPost(res.data));
-      }).catch(err => {
-        //요청이 정상적으로 안됬을때 수행
-        console.log(err,"에러")
       })
-
-  }
-}
+      .catch((err) => {
+        //요청이 정상적으로 안됬을때 수행
+        console.log(err, "에러");
+      });
+  };
+};
 
 // const addPostDB = () => {
 //   return function (dispatch, getState, { history }) {
@@ -110,16 +105,16 @@ const getPostDB = () => {
 const deletePostDB = (post_id) => {
   return function (dispatch, getState, { history }) {
     apis
-    .deletePost()
-    .then((res) => {
-      console.log(res)
-      dispatch(deletePost(post_id));
-    }).catch((err) =>{
-      console.log("삭제에러", err)
-    })
-  }
-}
-
+      .deletePost()
+      .then((res) => {
+        console.log(res);
+        dispatch(deletePost(post_id));
+      })
+      .catch((err) => {
+        console.log("삭제에러", err);
+      });
+  };
+};
 
 // 리듀서
 export default handleActions(
@@ -158,13 +153,9 @@ export default handleActions(
       }),
     [DELETE_POST]: (state, action) =>
       produce(state, (draft) => {
-        
-        let new_post_list = draft.list
-        
-        
-        
-        // let idx = draft.list.findIndex((p) => p.id === action.payload.post_id);
+        let new_post_list = draft.list;
 
+        // let idx = draft.list.findIndex((p) => p.id === action.payload.post_id);
 
         // if (idx !== -1) {
         //   // 배열에서 idx 위치의 요소 1개를 지움

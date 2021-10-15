@@ -2,10 +2,19 @@ import React, { useEffect } from "react";
 import { Image, Text, Grid } from "../elements";
 import { actionCreators as commentCreators } from "../redux/modules/comment";
 import { useSelector, useDispatch } from "react-redux";
+import { useLocation } from "react-router";
+import { getCommentDB } from "../redux/modules/comment";
+import { commentActions } from "../redux/modules/comment";
 
 const CommentList = (props) => {
-  const { post_id } = props;
-  console.log(props);
+  const location = useLocation();
+  const post_id = location.pathname.split("/")[2];
+  const comment_list = useSelector((state) => state.comment.list);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getCommentDB(post_id));
+  }, []);
+
   return (
     <React.Fragment>
       <Grid padding="16px">
@@ -14,6 +23,7 @@ const CommentList = (props) => {
     </React.Fragment>
   );
 };
+
 CommentList.defaultProps = {
   post_id: null,
 };
@@ -21,13 +31,18 @@ CommentList.defaultProps = {
 export default CommentList;
 
 const CommentItem = (props) => {
-  const dispatch = useDispatch();
+  const location = useLocation();
+
+  console.log(props);
+
+  //props에서 가져온거 넘겨주기
   const { user_profile, user_name, user_id, post_id, contents, insert_dt } =
     props;
+  const dispatch = useDispatch();
+  // const deleteComment = () => {
+  //   dispatch(commentActions.deleteCommentMiddleware(commentId));
+  // };
 
-  useEffect(() => {
-    dispatch(commentCreators.getCommentListDB());
-  }, []);
   return (
     <Grid is_flex>
       <Grid is_flex width="auto">
