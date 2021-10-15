@@ -15,17 +15,15 @@ import CommentWrite from "../components/CommentWrite";
 const PostDetail = (props) => {
   const dispatch = useDispatch();
   let post_id = props.match.params.id;
-  const post_list = useSelector((state) => state.post.list)
-  let post = post_list.fi()
+
+  const post_list = useSelector((state) => state.post.list);
+
   console.log(props);
 
-  
   console.log(post_list);
-  
-  
+
   const deletePost = () => {
     if (window.confirm("정말 삭제하시겠습니까?")) {
-      
       dispatch(deleteActions.deletePostDB(post_id));
       window.alert("삭제되엇습니다.");
       history.replace("/");
@@ -35,13 +33,12 @@ const PostDetail = (props) => {
   };
 
   const editPost = () => {
-    history.push("/edit/"+ post_id);
-  }
+    history.push("/edit/" + post_id);
+  };
 
   React.useEffect(() => {
     dispatch(onePostCreators.getOnePostDB(post_id));
   }, []);
-  
 
   return (
     <>

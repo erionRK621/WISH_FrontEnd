@@ -35,8 +35,6 @@ const Image = (props) => {
       <ImageDefault {...styles} onClick={_onClick}></ImageDefault>
     </React.Fragment>
   );
-
-  
 };
 
 Image.defaultProps = {
@@ -97,7 +95,5 @@ const MainInner = styled.div`
   background-position: center;
   /* background-size: cover; */
 `;
-
-
 
 export default Image;

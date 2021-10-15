@@ -25,7 +25,13 @@ const Header = (props) => {
       <React.Fragment>
         <Grid is_flex>
           <addLogo>
-            <img src={Logo} style={{ width: "25%" }} />
+            <img
+              src={Logo}
+              style={{ width: "25%" }}
+              onClick={() => {
+                history.push("/");
+              }}
+            />
           </addLogo>
           <div>
             <AccountCircleIcon
@@ -57,7 +63,13 @@ const Header = (props) => {
     <React.Fragment>
       <Grid is_flex>
         <addLogo>
-          <img src={Logo} style={{ width: "30%" }} />
+          <img
+            src={Logo}
+            style={{ width: "30%" }}
+            onClick={() => {
+              history.push("/");
+            }}
+          />
         </addLogo>
         <Grid is_flex>
           <Button
