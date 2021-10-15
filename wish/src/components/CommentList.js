@@ -2,20 +2,6 @@ import React, { useEffect } from "react";
 import { Image, Text, Grid } from "../elements";
 import { actionCreators as commentCreators } from "../redux/modules/comment";
 import { useSelector, useDispatch } from "react-redux";
-<<<<<<< HEAD
-import { useLocation } from "react-router";
-import { getCommentDB } from "../redux/modules/comment";
-import { commentActions } from "../redux/modules/comment";
-
-const CommentList = (props) => {
-  const location = useLocation();
-  const post_id = location.pathname.split("/")[2];
-  const comment_list = useSelector((state) => state.comment.list);
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getCommentDB(post_id));
-  }, []);
-=======
 
 import { useLocation } from 'react-router';
 
@@ -32,7 +18,6 @@ const CommentList = (props) => {
 
 
   console.log(props);
->>>>>>> d8277494992a5451532c91a2ab4bcf906c3d49a8
 
   return (
     <React.Fragment>

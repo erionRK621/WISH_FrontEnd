@@ -27,8 +27,8 @@ const CommentWrite = (props) => {
     setCommentText(e.target.value);
   };
 
-  const [comment_text, setCommentText] = React.useState("");
-  console.log(comment_text);
+  // const [comment_text, setCommentText] = React.useState("");
+  // console.log(comment_text);
 
   const write = () => {
     const comment = {
