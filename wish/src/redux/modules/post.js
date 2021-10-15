@@ -71,7 +71,6 @@ const getPostDB = () => {
       });
   };
 };
-
 //게시글 DB에서 수정하기
 const editPostDB = (post_id, contents = "") => {
   return function (dispatch, getState, { history }) {
@@ -165,7 +164,11 @@ const LikeDB = (post_id) => {
       )
       .then((res) => {
         console.log("리스폰쓰", res.data.likeCount);
+<<<<<<< HEAD
         dispatch(likeToggle(res.data.likeCount));
+=======
+        dispatch(getPostDB());
+>>>>>>> fa4e9b41bafc0dba01c36d7054604aa7adb6c2bd
       })
       .catch((err) => {
         console.log("좋아요 에러", err);
