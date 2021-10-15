@@ -23,8 +23,6 @@ const PostDetail = (props) => {
 
 
   let _post = post_list.find((p) => p._id === post_id)
-  let _postingDate = _post.createdAt.substr(0.10);
-  let postingDate = moment(_postingDate).format('YYYY년 MM월 DD일');
 
   console.log(_post)
   console.log(_post._id)
@@ -63,7 +61,7 @@ const PostDetail = (props) => {
             <Image shape="circle" src={props.user_profile} />
             <Text bold>{_post.authorName}</Text>
           </Profile>
-          <Text>{postingDate}</Text>
+          <Text>{_post.createdAt}</Text>
         </Grid>
         <Grid>
           <Image
