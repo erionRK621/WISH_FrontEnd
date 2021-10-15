@@ -73,10 +73,31 @@ const getPostDB = () => {
 }
 
 //게시글 DB에서 수정하기
-const editPostDB = (post_id, ) => {
+const editPostDB = (post_id, img, text) => {
   return function (dispatch, getState, { history }) {
-    console.log()
-
+    console.log(post_id)
+    console.log(img)
+    console.log(text)
+    const token = getToken()
+    axios
+    .patch(
+      `http://3.35.235.79/api/postings/${post_id}`,
+      {
+        "imageUrl": "img",
+        "text": "text"
+      },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+    )
+    .then((res) => {
+      console.log(res)
+      dispatch(deletePost(post_id));
+    }).catch((err) =>{
+      console.log("삭제에러", err)
+    })
   }
 }
 
@@ -89,6 +110,30 @@ const deletePostDB = (post_id) => {
     axios
     .delete(
       `http://3.35.235.79/api/postings/${post_id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+    )
+    .then((res) => {
+      console.log(res)
+      dispatch(deletePost(post_id));
+    }).catch((err) =>{
+      console.log("삭제에러", err)
+    })
+  }
+}
+
+//포스트 좋아요 토글
+const LikeDB = (post_id) => {
+  return function (dispatch, getState, { history }) {
+    console.log(post_id)
+    const token = getToken()
+    console.log(token);
+    axios
+    .post(
+      `http://3.35.235.79/api/postings/${post_id}/like`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -171,9 +216,10 @@ export default handleActions(
 
 const actionCreators = {
   setPost,
-  editPost,
+  editPostDB,
   deletePostDB,
   getPostDB,
+  LikeDB,
 };
 
 export { actionCreators };

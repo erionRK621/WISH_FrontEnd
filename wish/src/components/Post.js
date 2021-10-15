@@ -4,12 +4,18 @@ import styled from "styled-components";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 
 import { useSelector, useDispatch } from "react-redux";
+import { actionCreators as setLikeAction } from "../redux/modules/comment";
 
 const Post = (props) => {
   const dispatch = useDispatch();
   const { image_url, user_profile, insert_dt } = props;
   const post_list = useSelector((state) => state.post.list);
-  console.log(post_list);
+  // let post_id = props.match.params.id;
+  console.log(props.imageUrl);
+
+  const setLike = () => {
+    dispatch(setLikeAction.LikeDB());
+  };
 
 
 
@@ -37,7 +43,7 @@ const Post = (props) => {
         </Grid>
         <Grid is_flex>
           <Text bold>댓글{props.comment_cnt}개 모두보기</Text>
-          <FavoriteBorderIcon>{props.is_like}</FavoriteBorderIcon>
+          <FavoriteBorderIcon onClick={setLike} ></FavoriteBorderIcon>
         </Grid>
       </Grid>
     </PostContainer>

@@ -26,7 +26,9 @@ const PostDetail = (props) => {
     }
   };
 
-  console.log(post_id);
+  const editPost = () => {
+    history.push("/edit/"+ post_id);
+  }
   
 
   return (
@@ -34,7 +36,7 @@ const PostDetail = (props) => {
       <div>
         <Post />
         <Grid is_flex>
-          <Button text="수정" _onClick={deletePost} />
+          <Button text="수정" _onClick={editPost} />
           <Button text="삭제" _onClick={deletePost} />
         </Grid>
         <div style={{ textAlign: "center" }}>

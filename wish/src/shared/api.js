@@ -19,7 +19,7 @@ export const apis = {
   deletePost: (postingId) => instance.delete(`/api/postings/${postingId}`, ),
   // 게시물 삭제하기
 
-  getComment: () => instance.get("/api/postings/:postingId/comments"),
+  getComment: postingId => instance.get(`/api/postings/${postingId}/comments`),
   // 댓글 불러오기
 
   addComment: (comment, post_id) =>

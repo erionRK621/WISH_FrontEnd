@@ -3,14 +3,36 @@ import { Grid, Text, Button, Image, Input } from "../elements";
 import Upload from "../shared/Upload";
 
 import { useSelector, useDispatch } from "react-redux";
-import { actionCreators as postWriteAction } from "../redux/modules/postWrite";
+import { actionCreators as postEditAction } from "../redux/modules/postWrite";
 
-const PostWrite = (props) => {
+const PostEdit = (props) => {
   const dispatch = useDispatch(); 
-   const [contents, setContents] = React.useState("")
-
-  console.log(useSelector((state) => state.user));
+  //게시글 수정작업을 위한 코드추가
+  //포스트리스트값
+  const post_list = useSelector((state) => state.post.list)
   const img = useSelector((state) => state.image.previewImage);
+  const { history } = props;
+  //포스트아이디값
+  const post_id = props.match.params.id;
+//   const is_edit = post_id ? true : false;
+  console.log(post_list)
+  console.log(post_id)
+  const [contents, setContents] = React.useState("")
+  const is_edit = post_id ? true : false;
+  let _post = is_edit ? post_list.find((p) => p.id === post_id) : null;
+  
+  React.useEffect(() => {
+    if (is_edit && !_post) {
+      console.log("포스트 정보가 없어요!");
+      window.alert("포스트 정보가 없어요!")
+      history.goBack();
+      return;
+    }
+  }, []);
+
+  
+
+  
 
   console.log(
     "포스트",
@@ -23,15 +45,16 @@ const PostWrite = (props) => {
     setContents(e.target.value);
   };
 
-  const addPost = () => {
-    dispatch(postWriteAction.addPosts(contents, img));
+
+  const editPost = () => {
+    dispatch(postEditAction.editPostDB(post_id, contents, img));
   };
 
   return (
     <React.Fragment>
       <Grid padding="16px">
         <Text margin="0px" size="36px" bold>
-          게시글 작성
+          게시글 수정
         </Text>
         <Upload />
       </Grid>
@@ -51,19 +74,19 @@ const PostWrite = (props) => {
 
       <Grid padding="16px">
         <Input
-          value={contents}
+          value={post_list.text}
           _onChange={changeContents}
           label="게시글 내용"
-          placeholder="게시글 작성"
+          placeholder="게시글 수정"
           multiLine
         />
       </Grid>
 
       <Grid padding="16px">
-        <Button text="게시글 작성" _onClick={addPost}></Button>
+        <Button text="게시글 수정" _onClick={editPost}></Button>
       </Grid>
     </React.Fragment>
   );
 };
 
-export default PostWrite;
+export default PostEdit;
