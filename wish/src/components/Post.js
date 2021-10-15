@@ -1,5 +1,7 @@
 import React from "react";
 import { Grid, Text, Image, Button } from "../elements";
+import "moment";
+import moment from "moment";
 import styled from "styled-components";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 
@@ -12,10 +14,9 @@ import { history } from "../redux/configureStore";
 
 const Post = (props) => {
   const dispatch = useDispatch();
+
   const like = useSelector((state) => state.post.like);
   console.log(like);
-
-  // let post_id = props.match.params.id;
 
   const setLike = () => {
     dispatch(setLikeAction.LikeDB(props._id));

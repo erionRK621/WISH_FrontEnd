@@ -49,7 +49,6 @@ function App() {
             <Route path="/signup" exact component={Signup}></Route>
             <Route path="/mypage" exact component={Mypage}></Route>
             <Route path="/noti" exact component={Noti}></Route>
-            <Route path="/detail" exact component={PostDetail}></Route>
             <Route path="/edit/:id" exact component={PostEdit}></Route>
           </Switch>
         </ConnectedRouter>
