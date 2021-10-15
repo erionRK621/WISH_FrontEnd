@@ -20,8 +20,13 @@ export const apis = {
   deletePost: (postingId) => instance.delete(`/api/postings/${postingId}`),
   // 게시물 삭제하기
 
-  getMyPost: (id) => instance.get(`/api/users/${id}`),
-
+  getMyPost: (id) => {
+    instance.get(`/api/users/${id}`, {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    });
+  },
 
   getComment: (post_id) => {
     return instance.get(`/api/postings/${post_id}/comments`, {

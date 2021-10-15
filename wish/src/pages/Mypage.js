@@ -2,23 +2,22 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 import { Grid, Image, Text, Button } from "../elements";
 
+import { useLocation } from "react-router";
 import { history } from "../redux/configureStore";
 import { useSelector, useDispatch } from "react-redux";
 import { actionCreators as postCreators } from "../redux/modules/mypage";
 
 const Mypage = (props) => {
-  console.log(props);
+  const location = useLocation();
+  const id = location.pathname.split("/")[3];
   const dispatch = useDispatch();
   const { history } = props;
   //포스트리스트값 불러오기
   const post_list = useSelector((state) => state.post.list);
   console.log(post_list);
-  // const user_info = useSelector((state) => state.user);
-
-  // console.log(user_info);
 
   useEffect(() => {
-    dispatch(postCreators.getPostsDB());
+    dispatch(postCreators.getPostsDB(id));
   }, []);
 
   return (

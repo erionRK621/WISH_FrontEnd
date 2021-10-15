@@ -31,10 +31,10 @@ const initialPost = {
   insert_dt: moment().format("YYYY-MM-DD hh:mm:ss"),
 };
 
-const getPostsDB = () => {
+const getPostsDB = (id) => {
   return function (dispatch, getState, { history }) {
     apis
-      .getMyPost()
+      .getMyPost(id)
       .then((res) => {
         console.log(res);
         console.log(res.data);

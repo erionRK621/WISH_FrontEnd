@@ -47,7 +47,7 @@ function App() {
             <Route path="/post/:id" exact component={PostDetail} />
             <Route path="/login" exact component={Login}></Route>
             <Route path="/signup" exact component={Signup}></Route>
-            <Route path="/mypage" exact component={Mypage}></Route>
+            <Route path="/users/login/:id" exact component={Mypage}></Route>
             <Route path="/noti" exact component={Noti}></Route>
             <Route path="/edit/:id" exact component={PostEdit}></Route>
           </Switch>
