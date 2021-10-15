@@ -23,7 +23,7 @@ export const apis = {
   getMyPost: (id) => {
     instance.get(`/api/users/${id}`, {
       headers: {
-        authorization: `Bearer ${token}`,
+        authorization: `Bearer ${getToken()}`,
       },
     });
   },
