@@ -3,7 +3,7 @@ import { Grid, Text, Button, Image, Input } from "../elements";
 import Upload from "../shared/Upload";
 
 import { useSelector, useDispatch } from "react-redux";
-import { actionCreators as postEditAction } from "../redux/modules/postWrite";
+import { actionCreators as postEditAction } from "../redux/modules/post";
 
 const PostEdit = (props) => {
   const dispatch = useDispatch(); 
@@ -19,7 +19,9 @@ const PostEdit = (props) => {
   console.log(post_id)
   const [contents, setContents] = React.useState("")
   const is_edit = post_id ? true : false;
-  let _post = is_edit ? post_list.find((p) => p.id === post_id) : null;
+  console.log(is_edit);
+  let _post = is_edit ? post_list.find((p) => p._id === post_id) : null;
+  
   
   React.useEffect(() => {
     if (is_edit && !_post) {
@@ -29,17 +31,8 @@ const PostEdit = (props) => {
       return;
     }
   }, []);
-
-  
-
-  
-
-  console.log(
-    "포스트",
-    useSelector((state) => state.postWrite)
-  );
-
-  console.log("타입", typeof img);
+  console.log("포스트값", _post);
+  console.log("이미지", _post.imageUrl);
 
   const changeContents = (e) => {
     setContents(e.target.value);
@@ -47,7 +40,10 @@ const PostEdit = (props) => {
 
 
   const editPost = () => {
-    dispatch(postEditAction.editPostDB(post_id, contents, img));
+    console.log(post_id)
+    console.log(contents)
+    console.log(img)
+    dispatch(postEditAction.editPostDB(post_id, contents));
   };
 
   return (
@@ -65,19 +61,15 @@ const PostEdit = (props) => {
             미리보기
           </Text>
         </Grid>
-        {img ? (
-          <Image shape="rectangle" src={img} />
-        ) : (
-          <Image shape="rectangle" src={"http://via.placeholder.com/400x300"} />
-        )}
-      </Grid>
+          <Image shape="rectangle" src={_post.imageUrl} />
+        </Grid>
 
       <Grid padding="16px">
         <Input
-          value={post_list.text}
+          value={contents}
           _onChange={changeContents}
           label="게시글 내용"
-          placeholder="게시글 수정"
+          placeholder={_post.text}
           multiLine
         />
       </Grid>
