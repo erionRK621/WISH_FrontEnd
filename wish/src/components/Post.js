@@ -1,20 +1,25 @@
 import React from "react";
 import { Grid, Text, Image, Button } from "../elements";
+import "moment";
+import moment from "moment";
 import styled from "styled-components";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 
+import FavoriteIcon from "@mui/icons-material/Favorite";
+
 import { useSelector, useDispatch } from "react-redux";
-import { actionCreators as setLikeAction } from "../redux/modules/comment";
+import { actionCreators as setLikeAction } from "../redux/modules/post";
+
+import { history } from "../redux/configureStore";
 
 const Post = (props) => {
   const dispatch = useDispatch();
-  const { image_url, user_profile, insert_dt } = props;
-  const post_list = useSelector((state) => state.post.list);
-  // let post_id = props.match.params.id;
-  console.log(props.imageUrl);
+
+  const like = useSelector((state) => state.post.like);
+  console.log(like);
 
   const setLike = () => {
-    dispatch(setLikeAction.LikeDB());
+    dispatch(setLikeAction.LikeDB(props._id));
   };
 
   // const deletePost = () => {
@@ -26,7 +31,7 @@ const Post = (props) => {
       <Grid padding="16px" bg="#ffffff" margin="8px 0px">
         <Grid is_flex>
           <Profile>
-            <Image shape="circle" src={user_profile} />
+            <Image shape="circle" src={props.user_profile} />
             <Text bold>{props.authorName}</Text>
           </Profile>
         </Grid>
@@ -34,6 +39,9 @@ const Post = (props) => {
           <Image
             shape="rectangle"
             src={`http://3.35.235.79/${props.imageUrl}`}
+            _onClick={() => {
+              history.push(`/post/${props._id}`);
+            }}
           />
         </Grid>
         <Grid is_flex>
@@ -42,8 +50,18 @@ const Post = (props) => {
         </Grid>
         <Grid is_flex>
           <Text bold>댓글{props.comment_cnt}개 모두보기</Text>
+
           <FavoriteBorderIcon onClick={setLike}></FavoriteBorderIcon>
+          <FavoriteIcon onClick={setLike}></FavoriteIcon>
         </Grid>
+        <Text>
+          {" "}
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <span style={{ fontWeight: "bold" }}>좋아요 {like}개</span>
+        </Text>
       </Grid>
     </PostContainer>
   );
