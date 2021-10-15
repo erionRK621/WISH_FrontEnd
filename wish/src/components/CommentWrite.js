@@ -3,13 +3,16 @@ import { Grid, Input, Button } from "../elements";
 
 import { actionCreators as commentActions } from "../redux/modules/comment";
 import { useDispatch, useSelector } from "react-redux";
+import { useLocation } from "react-router";
 
 const CommentWrite = (props) => {
+  const location = useLocation();
   const dispatch = useDispatch();
-  const [comment_text, setCommentText] = React.useState();
 
-  const { post_id } = props;
+  const post_id = location.pathname.split("/")[2];
   console.log(post_id);
+
+  //comment list 가져오기
   //const comment = useSelector((state) => state.comment.list);
 
   // useEffect(() => {
@@ -17,15 +20,24 @@ const CommentWrite = (props) => {
   // }, []);
 
   const onChange = (e) => {
+    console.log(e.target.value);
     setCommentText(e.target.value);
   };
 
-  //axios 만들고 addComments를 addCommentDB로 바꿔줌
-  const write = () => {
-    console.log(comment_text);
-    dispatch(commentActions.addCommentDB(post_id, comment_text));
+  const [comment_text, setCommentText] = React.useState("");
+  console.log(comment_text);
+
+  const write = (comment_text) => {
+    const comment = {
+      comment_text,
+      user_name,
+      post_id,
+      insert_dt,
+    };
+    dispatch(commentActions.addCommentDB(comment));
     setCommentText("");
   };
+
   return (
     <React.Fragment>
       <Grid padding="16px" is_flex>
