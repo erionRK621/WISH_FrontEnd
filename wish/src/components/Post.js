@@ -17,12 +17,9 @@ const Post = (props) => {
     dispatch(setLikeAction.LikeDB());
   };
 
-
-
   // const deletePost = () => {
   //   dispatch(deleteActions.deletePostDB(contents));
   // };
-  
 
   return (
     <PostContainer>
@@ -32,10 +29,12 @@ const Post = (props) => {
             <Image shape="circle" src={user_profile} />
             <Text bold>{props.authorName}</Text>
           </Profile>
-          
         </Grid>
         <Grid>
-          <Image shape="rectangle" src={`http://3.35.235.79/${props.imageUrl}`} />
+          <Image
+            shape="rectangle"
+            src={`http://3.35.235.79/${props.imageUrl}`}
+          />
         </Grid>
         <Grid is_flex>
           <Text>{props.text}</Text>
@@ -43,7 +42,7 @@ const Post = (props) => {
         </Grid>
         <Grid is_flex>
           <Text bold>댓글{props.comment_cnt}개 모두보기</Text>
-          <FavoriteBorderIcon onClick={setLike} ></FavoriteBorderIcon>
+          <FavoriteBorderIcon onClick={setLike}></FavoriteBorderIcon>
         </Grid>
       </Grid>
     </PostContainer>

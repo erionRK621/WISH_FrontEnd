@@ -4,10 +4,9 @@ import { produce } from "immer";
 import "moment";
 import moment from "moment";
 import axios from "axios";
-import {apis} from '../../shared/api'
-import instance from '../../lib/axios'
+import { apis } from "../../shared/api";
+import instance from "../../lib/axios";
 import getToken from "../../shared/Token";
-
 
 // 액션타입생성(리듀서 작성시 재사용되기 때문에 액션타입을 지정하는것임)
 const SET_POST = "SET_POST";
@@ -47,7 +46,6 @@ const initialPost = {
 
 //미들웨어
 
-
 //메인페이지 게시글 가져오기
 const getPostDB = () => {
   return function (dispatch, getState, { history }) {
@@ -71,31 +69,32 @@ const getPostDB = () => {
 //게시글 DB에서 수정하기
 const editPostDB = (post_id, img, text) => {
   return function (dispatch, getState, { history }) {
-    console.log(post_id)
-    console.log(img)
-    console.log(text)
-    const token = getToken()
+    console.log(post_id);
+    console.log(img);
+    console.log(text);
+    const token = getToken();
     axios
-    .patch(
-      `http://3.35.235.79/api/postings/${post_id}`,
-      {
-        "imageUrl": "img",
-        "text": "text"
-      },
+      .patch(
+        `http://3.35.235.79/api/postings/${post_id}`,
+        {
+          imageUrl: "img",
+          text: "text",
+        },
         {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         }
-    )
-    .then((res) => {
-      console.log(res)
-      dispatch(deletePost(post_id));
-    }).catch((err) =>{
-      console.log("삭제에러", err)
-    })
-  }
-}
+      )
+      .then((res) => {
+        console.log(res);
+        dispatch(deletePost(post_id));
+      })
+      .catch((err) => {
+        console.log("삭제에러", err);
+      });
+  };
+};
 
 //게시글 DB에서 삭제
 const deletePostDB = (post_id) => {
@@ -104,28 +103,26 @@ const deletePostDB = (post_id) => {
     const token = getToken()
     console.log(token);
     axios
-    .delete(
-      `http://3.35.235.79/api/postings/${post_id}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-    )
-    .then((res) => {
-      console.log(res)
-      dispatch(deletePost(post_id));
-    }).catch((err) =>{
-      console.log("삭제에러", err)
-    })
-  }
-}
+      .delete(`http://3.35.235.79/api/postings/${post_id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        dispatch(deletePost(post_id));
+      })
+      .catch((err) => {
+        console.log("삭제에러", err);
+      });
+  };
+};
 
 //포스트 좋아요 토글
 const LikeDB = (post_id) => {
   return function (dispatch, getState, { history }) {
-    console.log(post_id)
-    const token = getToken()
+    console.log(post_id);
+    const token = getToken();
     console.log(token);
     axios
     .post(
@@ -152,9 +149,9 @@ export default handleActions(
     [SET_POST]: (state, action) =>
       produce(state, (draft) => {
         // undifined는 값이 잘넘어가고있다. 값이 나올경우 어딘가에 문제가 있는것
-        console.log(action.payload.postings);
-        draft.list = action.payload.post_list.postings
 
+        console.log(action.payload.postings);
+        draft.list = action.payload.post_list.postings;
         // 새배열에서 푸시를 하게되면 데이터 중복으로 계속 불러와지게됨.
         // draft.list.push(...action.payload.post_list.postings);
 
@@ -188,16 +185,13 @@ export default handleActions(
       produce(state, (draft) => {
          // 받아온 id값과 맞지 않는 id의 데이터들을 새로운 배열에 넣어서 기존 list에 덮어쓰기
         let new_post_list = draft.list.filter((p) => {
-          if(p.id !== action.payload.post){
-            return p
+          if (p.id !== action.payload.post) {
+            return p;
           }
-        })
-// 새롭게 바뀐 리스트를 현재의 리스트로 변경
-        draft.list = new_post_list; 
-        
+        });
+        // 새롭게 바뀐 리스트를 현재의 리스트로 변경
+        draft.list = new_post_list;
 
-        
-        
         // let idx = draft.list.findIndex((p) => p.id === action.payload.post_id);
 
         // let idx = draft.list.findIndex((p) => p.id === action.payload.post_id);

@@ -12,13 +12,6 @@ const PostWrite = (props) => {
   console.log(useSelector((state) => state.user));
   const img = useSelector((state) => state.image.previewImage);
 
-  console.log(
-    "포스트",
-    useSelector((state) => state.postWrite)
-  );
-
-  console.log("타입", typeof img);
-
   const changeContents = (e) => {
     setContents(e.target.value);
   };

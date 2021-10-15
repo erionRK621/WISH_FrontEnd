@@ -38,6 +38,7 @@ const Upload = (props) => {
             let base64Sub = base64.toString();
             setPreImg(base64Sub);
             // console.log("FOR문 안쪽", base64Sub);
+
             dispatch(imageActions.previewImg(base64Sub));
 
             setImgBase64((imgBase64) => [...imgBase64, base64Sub]);
@@ -54,6 +55,7 @@ const Upload = (props) => {
 
     const reader = new FileReader();
     const file = fileInput.current.files[0];
+
     // 파일내용 읽어옴
     reader.readAsDataURL(file);
   };

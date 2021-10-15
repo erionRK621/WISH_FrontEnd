@@ -18,7 +18,7 @@ export const apis = {
   // 게시물 작성하기
   editPost: (id, contents) => instance.put(`/api/post/${id}`, contents),
   // 게시물 수정하기
-  deletePost: (postingId) => instance.delete(`/api/postings/${postingId}`, ),
+  deletePost: (postingId) => instance.delete(`/api/postings/${postingId}`),
   // 게시물 삭제하기
   getComment: (post_id) => {
     return instance.get(`/api/postings/${post_id}/comments`);
@@ -34,6 +34,7 @@ export const apis = {
         },
       }
     ),
+
   // 댓글 등록하기
   deleteComment: (commentId) => instance.delete("/api/comment", commentId),
 
