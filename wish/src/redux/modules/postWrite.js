@@ -10,8 +10,16 @@ import getToken from "../../shared/Token";
 // Actions
 
 const ADD_POST = "ADD_POST";
+const IMG_FILE = "IMG_FILE";
 
 const addPost = createAction(ADD_POST, (post) => ({ post }));
+
+// const imgFile = createAction(IMG_FILE, (img) => {
+//   var text_con = img;
+//   console.log("여기로 오나");
+//   console.log(img);
+//   return { img };
+// });
 
 //초기상태값
 const initialState = {
@@ -34,22 +42,9 @@ const initialState = {
   ],
 };
 
-// const addPostDB = () = {
-//   return function (dispatch, getState, { history }) {
-//     instance
-//       .post(`api주소`, {데이터} ,{withCredentials: true})
-//         .then()
-
-//         }
-//       )
-//        .then()
-//   }
-// }
-
-const addPosts = (contents = "", img = "") => {
+const addPosts = (contents = "", img = "0") => {
   return function (dispatch, getState, { history }) {
     const _user = getState().user;
-    console.log("_user", _user);
 
     const token = window.localStorage.getItem("token");
     const realToken = token.replace(/\"/gi, "");
@@ -80,17 +75,20 @@ const addPosts = (contents = "", img = "") => {
       .post(
         "http://3.35.235.79/api/postings",
         {
-          imageUrl: img,
+          img: img,
           text: contents,
         },
         {
           headers: {
             Authorization: `Bearer ${realToken}`,
+            "Content-Type": "application/json",
           },
         }
       )
       .then((response) => {
         dispatch(addPost(post));
+        console.log("tjdrhd");
+        history.push("/");
       })
       .catch((error) => {
         console.log("DB ERROR", error);
@@ -103,12 +101,13 @@ export default handleActions(
   {
     [ADD_POST]: (state, action) =>
       produce(state, (draft) => {
-        console.log("여기 action", action);
-        console.log("여기 state", state);
-        console.log("이것은 draft", draft);
+        // console.log("여기 action", action);
+        // console.log("여기 state", state);
+        // console.log("이것은 draft", draft);
 
         draft.list.unshift(action.payload.post.list);
       }),
+    [IMG_FILE]: (state, action) => produce(state, (draft) => {}),
   },
   initialState
 );
@@ -117,6 +116,7 @@ export default handleActions(
 // 액션생성함수를 내보낸다.
 const actionCreators = {
   addPosts,
+  // imgFile,
 };
 
 export { actionCreators };

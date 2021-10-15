@@ -1,5 +1,6 @@
 import { Api } from "@mui/icons-material";
 import instance from "../lib/axios";
+import getToken from "./Token";
 
 //const accessToken = document.cookie.split("=")[1];
 
@@ -16,13 +17,29 @@ export const apis = {
   // 게시물 작성하기
   editPost: (id, contents) => instance.put(`/api/post/${id}`, contents),
   // 게시물 수정하기
-  deletePost: (post_id) => instance.delete(`/api/postings/${post_id}`),
+  deletePost: (postingId) => instance.delete(`/api/postings/${postingId}`),
   // 게시물 삭제하기
+  getComment: (post_id) => {
+    return instance.get(`/api/postings/${post_id}/comments`, {
+      headers: {
+        authorization: `Bearer ${getToken()}`,
+      },
+    });
+  },
+  // 댓글 불러오기  파라미터 이름은 중요하지않고 주소와 같기만 하면 됨
+  addComment: (comment, post_id) =>
+    instance.post(
+      `/api/postings/${post_id}/comments`,
+      { text: comment },
+      {
+        headers: {
+          authorization: `Bearer ${getToken()}`,
+        },
+      }
+    ),
 
-  getComment: () => instance.get("/api/postings/:postingId/comments"),
-  // 댓글 불러오기
-  addComment: (comment, post_id) => instance.post("/api/comment", comment, post_id),
   // 댓글 등록하기
+  deleteComment: (commentId) => instance.delete("/api/comment", commentId),
 
   // Signup(): () => instance.post("/signup")
   login: (params) => instance.post("/login", params),

@@ -6,18 +6,11 @@ import { useSelector, useDispatch } from "react-redux";
 import { actionCreators as postWriteAction } from "../redux/modules/postWrite";
 
 const PostWrite = (props) => {
-  const dispatch = useDispatch();
-  const [contents, setContents] = React.useState("");
+  const dispatch = useDispatch(); 
+   const [contents, setContents] = React.useState("")
+
   console.log(useSelector((state) => state.user));
-
   const img = useSelector((state) => state.image.previewImage);
-
-  console.log(
-    "포스트",
-    useSelector((state) => state.postWrite)
-  );
-
-  console.log("타입", typeof img);
 
   const changeContents = (e) => {
     setContents(e.target.value);

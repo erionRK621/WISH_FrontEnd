@@ -2,8 +2,8 @@ import { createBrowserHistory } from "history";
 import thunk from "redux-thunk";
 import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import { connectRouter } from "connected-react-router";
-import Comment from "./modules/comment";
 
+import Comment from "./modules/comment";
 import User from "./modules/user";
 import Post from "./modules/post";
 import PostWrite from "./modules/postWrite";
