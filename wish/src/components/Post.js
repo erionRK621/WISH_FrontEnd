@@ -3,6 +3,8 @@ import { Grid, Text, Image, Button } from "../elements";
 import styled from "styled-components";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 
+import FavoriteIcon from "@mui/icons-material/Favorite";
+
 import { useSelector, useDispatch } from "react-redux";
 import { actionCreators as setLikeAction } from "../redux/modules/post";
 
@@ -47,7 +49,9 @@ const Post = (props) => {
         </Grid>
         <Grid is_flex>
           <Text bold>댓글{props.comment_cnt}개 모두보기</Text>
+
           <FavoriteBorderIcon onClick={setLike}></FavoriteBorderIcon>
+          <FavoriteIcon onClick={setLike}></FavoriteIcon>
         </Grid>
         <Text>
           {" "}
