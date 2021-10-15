@@ -20,8 +20,8 @@ const Post = (props) => {
   const like = useSelector((state) => state.post.like);
   console.log(like);
 
-  let _postingDate = props.createdAt.substr(0.10);
-  let postingDate = moment(_postingDate).format('YYYY년 MM월 DD일');
+  // let _postingDate = props.createdAt.substr(0.10);
+  // let postingDate = moment(_postingDate).format('YYYY년 MM월 DD일');
 
   const setLike = () => {
     dispatch(setLikeAction.LikeDB(props._id));
@@ -51,7 +51,7 @@ const Post = (props) => {
         </Grid>
         <Grid is_flex>
           <Text>{props.text}</Text>
-          <Text>{postingDate}</Text>
+          <Text>{props.createdAt}</Text>
         </Grid>
         <Grid is_flex>
           <Text bold>댓글{props.comment_cnt}개 모두보기</Text>
