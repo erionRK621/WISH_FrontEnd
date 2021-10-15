@@ -42,7 +42,7 @@ const initialState = {
   ],
 };
 
-const addPosts = (contents = "", img = "") => {
+const addPosts = (contents = "", img = "0") => {
   return function (dispatch, getState, { history }) {
     const _user = getState().user;
 

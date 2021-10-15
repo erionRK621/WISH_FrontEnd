@@ -7,12 +7,14 @@ import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { Button, Grid } from "../elements";
 import { history } from "../redux/configureStore";
+
 import PostWrite from "../pages/PostWrite";
 import Mypage from "../pages/Mypage";
 import Header from "../components/Header";
 import PostList from "../pages/Postlist";
 import PostDetail from "../pages/PostDetail";
 import Noti from "../pages/Noti";
+import PostEdit from "../pages/PostEdit";
 import CommentList from "../components/CommentList";
 import Login from "../pages/Login";
 import Signup from "../pages/Signup";
@@ -51,6 +53,7 @@ function App() {
             <Route path="/mypage" exact component={Mypage}></Route>
             <Route path="/noti" exact component={Noti}></Route>
             <Route path="/detail" exact component={PostDetail}></Route>
+            <Route path="/edit/:id" exact component={PostEdit}></Route>         
           </Switch>
         </ConnectedRouter>
         <Button

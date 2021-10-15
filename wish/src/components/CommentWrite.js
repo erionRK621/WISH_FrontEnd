@@ -3,12 +3,18 @@ import { Grid, Input, Button } from "../elements";
 
 import { actionCreators as commentActions } from "../redux/modules/comment";
 import { useDispatch, useSelector } from "react-redux";
+import { useLocation } from "react-router";
 
 const CommentWrite = (props) => {
+  const location = useLocation();
   const dispatch = useDispatch();
   const [comment_text, setCommentText] = React.useState();
+  console.log(props);
+  console.log(props.match);
 
-  const { post_id } = props;
+  const post_id = location.pathname.split("/")[2];
+
+  //comment list 가져오기
   //const comment = useSelector((state) => state.comment.list);
 
   // useEffect(() => {
@@ -19,11 +25,18 @@ const CommentWrite = (props) => {
     setCommentText(e.target.value);
   };
 
+  console.log(comment_text);
+
   const write = () => {
-    console.log(comment_text);
-    dispatch(commentActions.addComments(post_id, comment_text));
+    const comment = {
+      comment_text,
+      post_id,
+    };
+
+    dispatch(commentActions.addCommentDB(comment));
     setCommentText("");
   };
+
   return (
     <React.Fragment>
       <Grid padding="16px" is_flex>

@@ -10,6 +10,7 @@ const PostList = (props) => {
 
     const dispatch = useDispatch();
     const {history} = props;
+    //포스트리스트값 불러오기
     const post_list = useSelector((state) => state.post.list);
     // const user_info = useSelector((state) => state.user);
     
@@ -18,6 +19,7 @@ const PostList = (props) => {
     useEffect(() => {
       dispatch(postCreators.getPostDB());
     }, []);
+    console.log("renders")
 
     console.log(post_list);
     return (

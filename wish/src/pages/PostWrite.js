@@ -6,10 +6,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { actionCreators as postWriteAction } from "../redux/modules/postWrite";
 
 const PostWrite = (props) => {
-  const dispatch = useDispatch();
-  const [contents, setContents] = React.useState("");
-  console.log(useSelector((state) => state.user));
+  const dispatch = useDispatch(); 
+   const [contents, setContents] = React.useState("")
 
+  console.log(useSelector((state) => state.user));
   const img = useSelector((state) => state.image.previewImage);
 
   const changeContents = (e) => {

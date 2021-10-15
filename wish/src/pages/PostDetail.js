@@ -12,11 +12,12 @@ import CommentList from "../components/CommentList";
 import CommentWrite from "../components/CommentWrite";
 
 const PostDetail = (props) => {
-
   const dispatch = useDispatch();
-  const post_id = props.match.params.id;
+  let post_id = props.match.params.id;
+  
   const deletePost = () => {
-    if(window.confirm("정말 삭제하시겠습니까?")) {
+    if (window.confirm("정말 삭제하시겠습니까?")) {
+      
       dispatch(deleteActions.deletePostDB(post_id));
       window.alert("삭제되엇습니다.");
       history.replace("/");
@@ -25,25 +26,22 @@ const PostDetail = (props) => {
     }
   };
 
+  const editPost = () => {
+    history.push("/edit/"+ post_id);
+  }
+  
 
-  console.log(post_id)
   return (
     <>
       <div>
         <Post />
         <Grid is_flex>
-            <Button
-              text="수정" 
-              _onClick={deletePost}
-            />
-            <Button
-            text="삭제" 
-            _onClick={deletePost}
-            />
+          <Button text="수정" _onClick={editPost} />
+          <Button text="삭제" _onClick={deletePost} />
         </Grid>
         <div style={{ textAlign: "center" }}>
-          <CommentWrite />
-          <CommentList />
+          {/* <CommentWrite />
+          <CommentList /> */}
         </div>
       </div>
     </>
@@ -74,11 +72,12 @@ const PostContainer = styled.div`
   margin-top: 70px;
   margin-bottom: 30px;
   border-radius: 5px;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.12), 0 2px 5px rgba(0,0,0,0.24);
-  @media (max-width: 750px){
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12), 0 2px 5px rgba(0, 0, 0, 0.24);
+  @media (max-width: 750px) {
     width: 80%;
   }
-  @media (max-width: 450px){
+  @media (max-width: 450px) {
     width: 100%;
+  }
 `;
 export default PostDetail;
