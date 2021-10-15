@@ -3,7 +3,7 @@ import "./App.css";
 import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { ConnectedRouter } from "connected-react-router";
-import { useDispatch } from "react-redux";
+
 import styled from "styled-components";
 import { Button, Grid } from "../elements";
 import { history } from "../redux/configureStore";
@@ -20,16 +20,13 @@ import Login from "../pages/Login";
 import Signup from "../pages/Signup";
 import getToken from "./Token";
 import { actionCreators as userActions } from "../redux/modules/user";
+import { useSelector, useDispatch } from "react-redux";
 
 function App() {
-  const is_token = window.localStorage.getItem("token") ? false : false;
+  const is_token = window.localStorage.getItem("token") ? true : false;
   const dispatch = useDispatch();
-
-  // window.localStorage.removeItem("token"); 이건 로그아웃 할때
-
-  // 토큰 큰따옴표 제거 함수 shared 안에 Token.js 에서 가져옵니다.
-
-  // console.log("트루냐 펄스냐", is_token);
+  const user = useSelector((state) => state.user);
+  console.log("내가 user", user);
 
   React.useEffect(() => {
     if (is_token) {
@@ -53,7 +50,7 @@ function App() {
             <Route path="/mypage" exact component={Mypage}></Route>
             <Route path="/noti" exact component={Noti}></Route>
             <Route path="/detail" exact component={PostDetail}></Route>
-            <Route path="/edit/:id" exact component={PostEdit}></Route>         
+            <Route path="/edit/:id" exact component={PostEdit}></Route>
           </Switch>
         </ConnectedRouter>
         <Button

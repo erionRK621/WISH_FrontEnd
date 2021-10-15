@@ -22,7 +22,11 @@ export const apis = {
   // 게시물 삭제하기
 
   getComment: (post_id) => {
-    return instance.get(`/api/postings/${post_id}/comments`);
+    return instance.get(`/api/postings/${post_id}/comments`, {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    });
   },
   // 댓글 불러오기  파라미터 이름은 중요하지않고 주소와 같기만 하면 됨
 

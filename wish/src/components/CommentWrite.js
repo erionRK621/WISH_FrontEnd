@@ -9,8 +9,6 @@ const CommentWrite = (props) => {
   const location = useLocation();
   const dispatch = useDispatch();
   const [comment_text, setCommentText] = React.useState();
-  console.log(props);
-  console.log(props.match);
 
   const post_id = location.pathname.split("/")[2];
 
@@ -24,8 +22,6 @@ const CommentWrite = (props) => {
   const onChange = (e) => {
     setCommentText(e.target.value);
   };
-
-  console.log(comment_text);
 
   const write = () => {
     const comment = {
