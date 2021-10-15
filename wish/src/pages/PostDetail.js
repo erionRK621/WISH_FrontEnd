@@ -19,7 +19,7 @@ const PostDetail = (props) => {
     if (window.confirm("정말 삭제하시겠습니까?")) {
       
       dispatch(deleteActions.deletePostDB(post_id));
-      window.alert("삭제되엇습니다!!.");
+      window.alert("삭제되엇습니다.");
       history.replace("/");
     } else {
       return;

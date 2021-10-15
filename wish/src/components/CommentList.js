@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Image, Text, Grid } from "../elements";
 import { actionCreators as commentCreators } from "../redux/modules/comment";
 import { useSelector, useDispatch } from "react-redux";
+
 import { useLocation } from 'react-router';
 
 const CommentList = (props) => {
@@ -17,6 +18,7 @@ const CommentList = (props) => {
 
 
   console.log(props);
+
   return (
     <React.Fragment>
       <Grid padding="16px">
@@ -25,11 +27,13 @@ const CommentList = (props) => {
     </React.Fragment>
   );
 };
+
 CommentList.defaultProps = {
   post_id: null,
 };
 
 export default CommentList;
+
 
 // const CommentItem = (props) => {
 //   const dispatch = useDispatch();
@@ -52,6 +56,7 @@ export default CommentList;
 //     </Grid>
 //   );
 // };
+
 
 // CommentItem.defaultProps = {
 //   user_profile: "",

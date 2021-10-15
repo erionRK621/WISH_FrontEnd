@@ -3,10 +3,12 @@ import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
 import "moment";
 import moment from "moment";
+
 import axios from "axios";
 import {apis} from '../../shared/api'
 import instance from '../../lib/axios'
 import getToken from "../../shared/Token";
+
 
 
 // 액션타입생성(리듀서 작성시 재사용되기 때문에 액션타입을 지정하는것임)
@@ -45,7 +47,6 @@ const initialPost = {
   insert_dt: moment().format("YYYY-MM-DD hh:mm:ss"),
 };
 
-
 //미들웨어
 
 
@@ -53,24 +54,21 @@ const initialPost = {
 const getPostDB = () => {
   return function (dispatch, getState, { history }) {
     apis
-    .getPost()
+      .getPost()
       .then((res) => {
         console.log(res);
         console.log(res.data);
-        if(res.data.token){
-          window.localStorage.setItem(
-            "token",
-            JSON.stringify(res.data.token)
-          );
-        }        
+        if (res.data.token) {
+          window.localStorage.setItem("token", JSON.stringify(res.data.token));
+        }
         dispatch(setPost(res.data));
-      }).catch(err => {
-        //요청이 정상적으로 안됬을때 수행
-        console.log(err,"에러")
       })
-
-  }
-}
+      .catch((err) => {
+        //요청이 정상적으로 안됬을때 수행
+        console.log(err, "에러");
+      });
+  };
+};
 
 //게시글 DB에서 수정하기
 const editPostDB = (post_id, img, text) => {
@@ -104,6 +102,7 @@ const editPostDB = (post_id, img, text) => {
 //게시글 DB에서 삭제
 const deletePostDB = (post_id) => {
   return function (dispatch, getState, { history }) {
+
     console.log(post_id)
     const token = getToken()
     console.log(token);
@@ -150,6 +149,7 @@ const LikeDB = (post_id) => {
 }
 
 
+
 // 리듀서
 export default handleActions(
   {
@@ -190,6 +190,7 @@ export default handleActions(
       }),
     [DELETE_POST]: (state, action) =>
       produce(state, (draft) => {
+
          // 받아온 id값과 맞지 않는 id의 데이터들을 새로운 배열에 넣어서 기존 list에 덮어쓰기
         let new_post_list = draft.list.filter((p) => {
           if(p.id !== action.payload.post){
@@ -204,6 +205,8 @@ export default handleActions(
         
         // let idx = draft.list.findIndex((p) => p.id === action.payload.post_id);
 
+
+        // let idx = draft.list.findIndex((p) => p.id === action.payload.post_id);
 
         // if (idx !== -1) {
         //   // 배열에서 idx 위치의 요소 1개를 지움
