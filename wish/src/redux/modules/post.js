@@ -45,7 +45,6 @@ const initialPost = {
   insert_dt: moment().format("YYYY-MM-DD hh:mm:ss"),
 };
 
-
 //미들웨어
 
 
@@ -53,24 +52,21 @@ const initialPost = {
 const getPostDB = () => {
   return function (dispatch, getState, { history }) {
     apis
-    .getPost()
+      .getPost()
       .then((res) => {
         console.log(res);
         console.log(res.data);
-        if(res.data.token){
-          window.localStorage.setItem(
-            "token",
-            JSON.stringify(res.data.token)
-          );
-        }        
+        if (res.data.token) {
+          window.localStorage.setItem("token", JSON.stringify(res.data.token));
+        }
         dispatch(setPost(res.data));
-      }).catch(err => {
-        //요청이 정상적으로 안됬을때 수행
-        console.log(err,"에러")
       })
-
-  }
-}
+      .catch((err) => {
+        //요청이 정상적으로 안됬을때 수행
+        console.log(err, "에러");
+      });
+  };
+};
 
 //게시글 DB에서 수정하기
 const editPostDB = (post_id, img, text) => {
@@ -204,6 +200,7 @@ export default handleActions(
         
         // let idx = draft.list.findIndex((p) => p.id === action.payload.post_id);
 
+        // let idx = draft.list.findIndex((p) => p.id === action.payload.post_id);
 
         // if (idx !== -1) {
         //   // 배열에서 idx 위치의 요소 1개를 지움

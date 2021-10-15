@@ -11,7 +11,7 @@ const Post = (props) => {
   const { image_url, user_profile, insert_dt } = props;
   const post_list = useSelector((state) => state.post.list);
   // let post_id = props.match.params.id;
-  console.log(props.imageUrl);
+  console.log(post_list);
 
   const setLike = () => {
     dispatch(setLikeAction.LikeDB());
