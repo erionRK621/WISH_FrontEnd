@@ -14,10 +14,9 @@ import CommentWrite from "../components/CommentWrite";
 const PostDetail = (props) => {
   const dispatch = useDispatch();
   let post_id = props.match.params.id;
-  
+
   const deletePost = () => {
     if (window.confirm("정말 삭제하시겠습니까?")) {
-      
       dispatch(deleteActions.deletePostDB(post_id));
       window.alert("삭제되엇습니다.");
       history.replace("/");
@@ -27,9 +26,8 @@ const PostDetail = (props) => {
   };
 
   const editPost = () => {
-    history.push("/edit/"+ post_id);
-  }
-  
+    history.push("/edit/" + post_id);
+  };
 
   return (
     <>
@@ -40,8 +38,8 @@ const PostDetail = (props) => {
           <Button text="삭제" _onClick={deletePost} />
         </Grid>
         <div style={{ textAlign: "center" }}>
-          {/* <CommentWrite />
-          <CommentList /> */}
+          <CommentWrite />
+          <CommentList />
         </div>
       </div>
     </>
