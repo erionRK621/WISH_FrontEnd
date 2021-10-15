@@ -16,7 +16,9 @@ const PostDetail = (props) => {
   const dispatch = useDispatch();
   let post_id = props.match.params.id;
   const post_list = useSelector((state) => state.post.list)
-  let post = post_list.fi()
+  console.log(post_list)
+  let _post = post_list.find((p) => p.id === post_id)
+  console.log(_post)
   console.log(props);
 
   
