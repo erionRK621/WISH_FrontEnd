@@ -79,13 +79,13 @@ const Header = (props) => {
             onClick={() => {
               history.push("/login");
             }}
-          >LOGIN</Button>
+          >LOG IN</Button>
           <Button
             variant="outlined"
             onClick={() => {
               history.push("/signup");
             }}
-          >LOGOUT</Button>
+          >SIGN UP</Button>
         </ButtonGroup>
       </Grid>
     </React.Fragment>

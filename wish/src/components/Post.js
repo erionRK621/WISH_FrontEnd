@@ -17,12 +17,13 @@ const Post = (props) => {
   
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
+  const comment_cnt = useSelector((state) => state.comment);
   const like = props.Like.length;
-  console.log(props)
+  console.log(comment_cnt)
 
   const is_login = user.is_login;
   console.log("포스트의 프롯브", props);
-
+  console.log("포스트의 코멘트", props);
   console.log("유저정보", user);
 
   // console.log(props.Like.length);
@@ -61,11 +62,11 @@ const Post = (props) => {
           <Text>{props.text}</Text>
         </Grid>
         <Grid is_flex>
-          <Text bold>댓글{props.comment_cnt}개</Text>
+          <Text bold>댓글 {props.commentsCnt}개 </Text>
           {is_login && (
-            <FavoriteBorderIcon onClick={setLike}></FavoriteBorderIcon>
+            <FavoriteIcon style={{color:"lightpink"}} onClick={setLike}></FavoriteIcon>
           )}
-          {is_login && <FavoriteIcon onClick={setLike}></FavoriteIcon>}
+          {/* {is_login && <FavoriteIcon onClick={setLike}></FavoriteIcon>} */}
         </Grid>
         <Text>
           {" "}

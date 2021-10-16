@@ -19,14 +19,13 @@ const PostDetail = (props) => {
   const dispatch = useDispatch();
   let post_id = props.match.params.id;
   const post_list = useSelector((state) => state.post.list)
-  const user_id= useSelector((state) => state.user._id)
-  console.log(post_list)
+  const user_id = useSelector((state) => state.user._id)
+  console.log(post_list);
+  console.log(user_id);
 
 
   let _post = post_list.find((p) => p._id === post_id);
-
-  // console.log(_post);
-  // console.log(_post._id);
+  console.log(_post.authorID);
   // console.log(_post.authorName);
   // console.log(_post.text);
   // console.log(_post.imageUrl);
@@ -49,8 +48,9 @@ const PostDetail = (props) => {
   const editPost = () => {
     history.push("/edit/" + post_id);
   };
-
-  if(user_id != _post.authorName) {
+  console.log(user_id)
+  console.log(_post.authorID)
+  if(user_id == _post.authorID) {
     return (
       <>
         <div>
@@ -74,7 +74,6 @@ const PostDetail = (props) => {
           </Grid>
         </Grid>
       </PostContainer>
-      
           <Grid is_flex>
             <Button text="수정" _onClick={editPost} />
             <Button text="삭제" _onClick={deletePost} />
@@ -123,21 +122,6 @@ const PostDetail = (props) => {
   
 };
 
-// Post.defaultProps = {
-//   user_info: {
-//     user_name: "위시",
-//     user_profile:
-//       "https://images.unsplash.com/photo-1540331547168-8b63109225b7?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=719&q=80",
-//   },
-//   image_url:
-//     "https://images.unsplash.com/photo-1581235720704-06d3acfcb36f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=880&q=80",
-//   content: "블라블라",
-//   insert_dt: "2021-10-11 10:00:00",
-//   like_cnt: 10,
-//   comment_cnt: 10,
-//   is_like: false,
-//   is_me: false,
-// };
 
 const PostContainer = styled.div`
   background-color: white;

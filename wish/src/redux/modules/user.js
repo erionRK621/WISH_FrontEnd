@@ -55,10 +55,12 @@ const getUserDB = () => {
         },
       })
       .then((response) => {
+        console.log("겟 유저 디비", response);
         dispatch(
           getUser({
             nick: response.data.nick,
             email: response.data.email,
+            _id: response.data._id,
           })
         );
       });
@@ -87,7 +89,8 @@ const loginDB = (email, password) => {
         history.push("/");
       })
       .catch((error) => {
-        console.log("Login Error", error);
+        console.log("Login Error", error.response.data.msg);
+        window.alert(error.response.data.msg);
       });
   };
 };
@@ -149,6 +152,7 @@ export default handleActions(
         draft.nick = action.payload.user.nick;
         draft.email = action.payload.user.email;
         draft.is_login = true;
+        draft._id = action.payload.user._id;
       }),
 
     [LOG_OUT]: (state, action) =>

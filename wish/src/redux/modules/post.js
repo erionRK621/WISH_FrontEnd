@@ -7,6 +7,7 @@ import axios from "axios";
 import { apis } from "../../shared/api";
 import instance from "../../lib/axios";
 import getToken from "../../shared/Token";
+import { actionCreators as commentActions } from "./comment";
 
 // 액션타입생성(리듀서 작성시 재사용되기 때문에 액션타입을 지정하는것임)
 const SET_POST = "SET_POST";
@@ -63,6 +64,13 @@ const getPostDB = () => {
         console.log(res);
         console.log(res.data.newArray);
         dispatch(setPost(res.data.newArray));
+        // let post_id_list = res.data.newArray._id
+        // post_id_list.map((p, idx) => { 
+        //   console.log(p);
+        //   dispatch(commentActions.getCommentDB(p))
+         
+        // }
+        // )
       })
       .catch((err) => {
         //요청이 정상적으로 안됬을때 수행
@@ -159,9 +167,9 @@ const LikeDB = (post_id) => {
         }
       )
       .then((res) => {
-        // console.log(res);
+        console.log(res);
         // console.log("리스폰쓰", res.data.likeCount);
-        dispatch(likeToggle(res.data.likeCount));
+        dispatch(getPostDB(res.data.likeCount));
       })
       .catch((err) => {
         console.log("좋아요 에러", err);

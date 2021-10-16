@@ -50,18 +50,7 @@ const PostEdit = (props) => {
         <Text margin="0px" size="36px" bold>
           게시글 수정
         </Text>
-        <Upload />
       </Grid>
-
-      <Grid>
-        <Grid padding="16px">
-          <Text margin="0px" size="24px" bold>
-            미리보기
-          </Text>
-        </Grid>
-        <Image shape="rectangle" src={_post.imageUrl} />
-      </Grid>
-
       <Grid padding="16px">
         <Input
           value={contents}
