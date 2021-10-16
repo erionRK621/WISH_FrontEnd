@@ -14,11 +14,11 @@
 #### 자신이 이미 사용하고있거나 최근에 구매한 상품, 눈여겨 보고 있는 궁금한 상품들을 소개하고 얘기나누어 보아요 
 #### 다른 사람이 올린 흥미로운 제품에 좋아요로 관심표현!
 
-## Fromt-End 기술스택
+## 🖥Fromt-End 기술스택
 
 ![KakaoTalk_Photo_2021-10-16-17-02-40](https://user-images.githubusercontent.com/83391349/137579773-0ab85eca-5e4d-4f93-bd92-ff987f84a4ef.png)
 
-## 팀원소개
+## 🧑🏻‍💻팀원소개
 
 ### 프론트엔드
 * 김준형:https://github.com/erionRK621
@@ -27,6 +27,6 @@
 
 
 ### 백엔드
-* 김기태:
-* 이보훈:
-* 서연제:
+* 김기태:https://github.com/TAE6919
+* 이보훈:https://github.com/ebohoon
+* 서연제:https://github.com/yeonjeseo
