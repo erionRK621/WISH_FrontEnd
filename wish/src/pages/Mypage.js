@@ -12,7 +12,11 @@ const Mypage = (props) => {
   const { history } = props;
   //포스트리스트값 불러오기
   const post_list = useSelector((state) => state.post.list);
-  console.log(post_list);
+  const _user = useSelector((state) => state.user);
+  const image = useSelector((state) => state.image);
+  
+  console.log(_user);
+  console.log(image);
   // const user_info = useSelector((state) => state.user);
 
   // console.log(user_info);
@@ -26,7 +30,7 @@ const Mypage = (props) => {
       <Grid is_flex padding="20px" backgroundColor="#e6f3f7">
         <Image shape="circle" size={85}></Image>
         <Text bold size="20px">
-          {}
+          {_user.nick}
         </Text>
         <Text bold size="20px">
           {}개

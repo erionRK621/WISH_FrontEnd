@@ -13,9 +13,12 @@ import { actionCreators as setLikeAction } from "../redux/modules/post";
 import { history } from "../redux/configureStore";
 
 const Post = (props) => {
+
+  
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const like = props.Like.length;
+  console.log(props)
 
   const is_login = user.is_login;
   console.log("포스트의 프롯브", props);
@@ -23,6 +26,9 @@ const Post = (props) => {
   console.log("유저정보", user);
 
   // console.log(props.Like.length);
+
+  // let _postingDate = props.createdAt.substr(0.10);
+  // let postingDate = moment(_postingDate).format('YYYY년 MM월 DD일');
 
   const setLike = () => {
     dispatch(setLikeAction.LikeDB(props._id));
@@ -40,6 +46,7 @@ const Post = (props) => {
             <Image shape="circle" src={props.user_profile} />
             <Text bold>{props.authorName}</Text>
           </Profile>
+          <Text>{props.createdAt}</Text>
         </Grid>
         <Grid>
           <Image
@@ -52,7 +59,6 @@ const Post = (props) => {
         </Grid>
         <Grid is_flex>
           <Text>{props.text}</Text>
-          <Text>{props.createdAt}</Text>
         </Grid>
         <Grid is_flex>
           <Text bold>댓글{props.comment_cnt}개</Text>

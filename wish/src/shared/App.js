@@ -3,6 +3,7 @@ import "./App.css";
 import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { ConnectedRouter } from "connected-react-router";
+import ReacModal from 'react-modal';
 
 import styled from "styled-components";
 import { Button, Grid } from "../elements";
@@ -26,7 +27,9 @@ function App() {
   const is_token = window.localStorage.getItem("token") ? true : false;
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
-  console.log("내가 user", user.is_login);
+  console.log("내가 user", user);
+  ReacModal.setAppElement('#root');
+
   React.useEffect(() => {
     if (is_token) {
       //유저 정보 받아오는 미들웨어 실행
