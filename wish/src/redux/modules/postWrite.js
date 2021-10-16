@@ -70,7 +70,6 @@ const addPosts = (contents = "", img = "0") => {
         is_me: false,
       },
     };
-
     axios
       .post(
         "http://3.35.235.79/api/postings",

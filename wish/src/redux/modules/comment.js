@@ -19,8 +19,9 @@ const ADD_COMMENT = "ADD_COMMENT";
 const DELETE_COMMENT = "DELETE_COMMENT";
 
 //액션생성함수만들기
-const getComment = createAction(GET_COMMENT, (comment_list) => ({
+const getComment = createAction(GET_COMMENT, (comment_list, comment_cnt) => ({
   comment_list,
+  comment_cnt
 }));
 const addComment = createAction(ADD_COMMENT, (comment) => ({
   comment,
@@ -46,7 +47,8 @@ export const getCommentDB = (postId) => {
         console.log("!!!!!!!!!", res);
 
         const commentList = res.data.allComments;
-        dispatch(getComment(commentList));
+        console.log(commentList.length)
+        dispatch(getComment(commentList, commentList.length));
       })
       .catch((error) => {
         window.alert("댓글을 불러오는데 실패하였습니다.");
@@ -85,7 +87,10 @@ export default handleActions(
   {
     [GET_COMMENT]: (state, action) =>
       produce(state, (draft) => {
+        console.log(action)
         draft.list = action.payload.comment_list;
+        draft.cnt = action.payload.comment_list.length;
+        console.log(draft.cnt)
       }),
     [ADD_COMMENT]: (state, action) =>
       produce(state, (draft) => {
