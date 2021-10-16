@@ -29,7 +29,7 @@ const Signup = (props) => {
 
     dispatch(userActions.signupDB(user_name, email, pwd, pwd_check));
   };
-
+  // 이메일 형식 / 닉네임 중복불가 / 비밀번호는 4자리 이상, 닉네임과 겹치면 안됨/
   return (
     <React.Fragment>
       <Grid padding="16px">
@@ -49,7 +49,7 @@ const Signup = (props) => {
 
         <Grid padding="16px 0px">
           <Input
-            label="닉네임"
+            label="닉네임(3글자 이상/ 영문만 가능)"
             placeholder="닉네임을 입력해주세요."
             _onChange={(e) => {
               setUserName(e.target.value);
@@ -59,7 +59,7 @@ const Signup = (props) => {
 
         <Grid padding="16px 0px">
           <Input
-            label="비밀번호"
+            label="비밀번호 (닉네임의 문자 포함 불가. 4자리 이상)"
             placeholder="비밀번호를 입력해주세요."
             _onChange={(e) => {
               setPwd(e.target.value);

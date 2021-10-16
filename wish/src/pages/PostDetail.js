@@ -23,18 +23,16 @@ const PostDetail = (props) => {
   console.log(post_list);
 
   let _post = post_list.find((p) => p._id === post_id);
-  let _postingDate = _post.createdAt.substr(0.1);
-  let postingDate = moment(_postingDate).format("YYYY년 MM월 DD일");
 
-  console.log(_post);
-  console.log(_post._id);
-  console.log(_post.authorName);
-  console.log(_post.text);
-  console.log(_post.imageUrl);
+  // console.log(_post);
+  // console.log(_post._id);
+  // console.log(_post.authorName);
+  // console.log(_post.text);
+  // console.log(_post.imageUrl);
 
-  console.log(props);
+  // console.log(props);
 
-  console.log(post_list);
+  // console.log(post_list);
 
 
   const deletePost = () => {
@@ -62,7 +60,7 @@ const PostDetail = (props) => {
                 <Image shape="circle" src={props.user_profile} />
                 <Text bold>{_post.authorName}</Text>
               </Profile>
-              <Text>{postingDate}</Text>
+              <Text>{_post.createdAt}</Text>
             </Grid>
             <Grid>
               <Image

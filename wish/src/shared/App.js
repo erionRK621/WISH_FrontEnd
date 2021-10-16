@@ -26,8 +26,7 @@ function App() {
   const is_token = window.localStorage.getItem("token") ? true : false;
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
-  console.log("내가 user", user);
-
+  console.log("내가 user", user.is_login);
   React.useEffect(() => {
     if (is_token) {
       //유저 정보 받아오는 미들웨어 실행
@@ -52,13 +51,16 @@ function App() {
             <Route path="/edit/:id" exact component={PostEdit}></Route>
           </Switch>
         </ConnectedRouter>
-        <Button
-          is_float
-          text="+"
-          _onClick={() => {
-            history.push("/write");
-          }}
-        ></Button>
+
+        {user.is_login && (
+          <Button
+            is_float
+            text="+"
+            _onClick={() => {
+              history.push("/write");
+            }}
+          ></Button>
+        )}
       </Grid>
     </React.Fragment>
   );
