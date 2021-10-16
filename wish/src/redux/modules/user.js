@@ -82,15 +82,20 @@ const loginDB = (email, password) => {
             is_login: true,
           })
         );
+
         window.localStorage.setItem(
           "token",
           JSON.stringify(response.data.token)
         );
+
         history.push("/");
       })
+      .then((res) => {
+        dispatch(getUserDB());
+      })
       .catch((error) => {
-        console.log("Login Error", error.response.data.msg);
-        window.alert(error.response.data.msg);
+        console.log("Login Error", error.response);
+        window.alert(error.response);
       });
   };
 };

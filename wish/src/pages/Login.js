@@ -1,4 +1,3 @@
-import { SettingsPowerRounded } from "@material-ui/icons";
 import React from "react";
 import { Text, Button, Grid, Input } from "../elements/index";
 import { useSelector, useDispatch } from "react-redux";
@@ -66,16 +65,17 @@ const Login = () => {
             login();
           }}
         ></Button>
-
+{/* 
         <a
           href="http://3.35.235.79/kakao
         "
         >
           카카오톡으로 로그인하기
-        </a>
+        </a> */}
       </Grid>
     </React.Fragment>
   );
 };
+
 
 export default Login;

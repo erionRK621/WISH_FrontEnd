@@ -13,18 +13,21 @@ import { actionCreators as setLikeAction } from "../redux/modules/post";
 import { history } from "../redux/configureStore";
 
 const Post = (props) => {
-
-  
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const comment_cnt = useSelector((state) => state.comment);
   const like = props.Like.length;
-  console.log(comment_cnt)
+  console.log(comment_cnt);
 
   const is_login = user.is_login;
   console.log("포스트의 프롯브", props);
-  console.log("포스트의 코멘트", props);
+  console.log("포스트의 코멘트", props.Like);
   console.log("유저정보", user);
+  const post_like_user = props.Like;
+  const user_id = user._id;
+
+  const like_result = post_like_user.find((e) => e._id === user_id);
+  console.log("과연", like_result);
 
   // console.log(props.Like.length);
 
@@ -62,11 +65,19 @@ const Post = (props) => {
           <Text>{props.text}</Text>
         </Grid>
         <Grid is_flex>
-          <Text bold>댓글 {props.commentsCnt}개 </Text>
-          {is_login && (
-            <FavoriteIcon style={{color:"lightpink"}} onClick={setLike}></FavoriteIcon>
+          <Text bold>댓글{props.comment_cnt}개 </Text>
+          {is_login && like_result && (
+            <FavoriteIcon
+              style={{ color: "lightpink" }}
+              onClick={setLike}
+            ></FavoriteIcon>
           )}
-          {/* {is_login && <FavoriteIcon onClick={setLike}></FavoriteIcon>} */}
+          {is_login && !like_result && (
+            <FavoriteBorderIcon
+              onClick={setLike}
+              style={{ color: "lightpink" }}
+            ></FavoriteBorderIcon>
+          )}
         </Grid>
         <Text>
           {" "}
