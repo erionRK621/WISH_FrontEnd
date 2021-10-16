@@ -19,20 +19,21 @@ const PostDetail = (props) => {
   const dispatch = useDispatch();
   let post_id = props.match.params.id;
   const post_list = useSelector((state) => state.post.list)
+  const user_id= useSelector((state) => state.user._id)
   console.log(post_list)
 
 
+// 1.수정포인트
+//   //유저아이디
+//   //포스트를 작성한 유저아이디
+
+// 2.토큰
+
   let _post = post_list.find((p) => p._id === post_id)
 
-  console.log(_post)
-  console.log(_post._id)
   console.log(_post.authorName)
-  console.log(_post.text)
-  console.log(_post.imageUrl)
+  console.log(user_id)
 
-  console.log(props);
-
-  console.log(post_list);
 
 
   const deletePost = () => {
@@ -49,10 +50,45 @@ const PostDetail = (props) => {
     history.push("/edit/" + post_id);
   };
 
-
-
-  return (
-    <>
+  if(user_id != _post.authorName) {
+    return (
+      <>
+        <div>
+        <PostContainer>
+        <Grid padding="16px" bg="#ffffff" margin="8px 0px">
+          <Grid is_flex>
+            <Profile>
+              <Image shape="circle" src={props.user_profile} />
+              <Text bold>{_post.authorName}</Text>
+            </Profile>
+            <Text>{_post.createdAt}</Text>
+          </Grid>
+          <Grid>
+            <Image
+              shape="rectangle"
+              src={`http://3.35.235.79/${_post.imageUrl}`}
+            />
+          </Grid>
+          <Grid is_flex>
+            <p>{_post.text}</p>
+          </Grid>
+        </Grid>
+      </PostContainer>
+      
+          <Grid is_flex>
+            <Button text="수정" _onClick={editPost} />
+            <Button text="삭제" _onClick={deletePost} />
+          </Grid>
+          <div style={{ textAlign: "center" }}>
+            <CommentWrite />
+            <CommentList />
+          </div>
+        </div>
+      </>
+    )
+  } else {
+    return (
+      <>
       <div>
       <PostContainer>
       <Grid padding="16px" bg="#ffffff" margin="8px 0px">
@@ -75,17 +111,16 @@ const PostDetail = (props) => {
         </Grid>
       </Grid>
     </PostContainer>
-        <Grid is_flex>
-          <Button text="수정" _onClick={editPost} />
-          <Button text="삭제" _onClick={deletePost} />
-        </Grid>
+    {/* {user_id == _post.authorName &&} */}
         <div style={{ textAlign: "center" }}>
           <CommentWrite />
           <CommentList />
         </div>
       </div>
     </>
-  );
+      );
+  }
+  
 };
 
 // Post.defaultProps = {

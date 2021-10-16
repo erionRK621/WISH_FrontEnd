@@ -50,6 +50,7 @@ const ImageDefault = styled.div`
   height: var(--size);
   background-image: url("${(props) => props.src}");
   background-size: cover;
+  background-position: center;
 `;
 
 const AspectOutter = styled.div`

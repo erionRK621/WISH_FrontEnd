@@ -1,10 +1,12 @@
 import React from "react";
-import { Grid, Text, Button } from "../elements";
+import { Grid, Text} from "../elements";
 import Logo from "../shared/img/logo2.png";
 import styled from "styled-components";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import NotificationsActiveIcon from "@mui/icons-material/NotificationsActive";
 import LogoutIcon from "@mui/icons-material/Logout";
+import Button from '@mui/material/Button';
+import ButtonGroup from '@mui/material/ButtonGroup';
 // useSelector는 store에 있는 값을 가져와서 사용할수 있도록 해주는 친구이다.
 import { useSelector, useDispatch } from "react-redux";
 import { actionCreators as userActions } from "../redux/modules/user";
@@ -66,25 +68,25 @@ const Header = (props) => {
           <img
             src={Logo}
             style={{ width: "30%" }}
-            onClick={() => {
+            _onClick={() => {
               history.push("/");
             }}
           />
         </addLogo>
-        <Grid is_flex>
+        <ButtonGroup size="large" variant="contained" aria-label="outlined primary button group">
           <Button
-            text="로그인"
-            _onClick={() => {
+            style={{backgroundColor: '#346aff'}}
+            onClick={() => {
               history.push("/login");
             }}
-          ></Button>
+          >LOGIN</Button>
           <Button
-            text="회원가입"
-            _onClick={() => {
+            variant="outlined"
+            onClick={() => {
               history.push("/signup");
             }}
-          ></Button>
-        </Grid>
+          >LOGOUT</Button>
+        </ButtonGroup>
       </Grid>
     </React.Fragment>
   );

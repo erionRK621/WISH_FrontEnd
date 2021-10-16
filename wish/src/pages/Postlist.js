@@ -11,6 +11,7 @@ const PostList = (props) => {
   const { history } = props;
   //포스트리스트값 불러오기
   const post_list = useSelector((state) => state.post.list);
+  console.log(post_list);
   // const user_info = useSelector((state) => state.user);
 
   // console.log(user_info);

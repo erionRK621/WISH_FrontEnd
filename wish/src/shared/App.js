@@ -3,6 +3,7 @@ import "./App.css";
 import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { ConnectedRouter } from "connected-react-router";
+import ReacModal from 'react-modal';
 
 import styled from "styled-components";
 import { Button, Grid } from "../elements";
@@ -27,6 +28,7 @@ function App() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   console.log("내가 user", user);
+  ReacModal.setAppElement('#root');
 
   React.useEffect(() => {
     if (is_token) {

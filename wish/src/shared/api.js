@@ -11,7 +11,7 @@ import getToken from "./Token";
 // get과 delete의 경우 두 번째 인자에 데이터를 담아 보낼수 없기 때문에 서버에 데이터를 보낼경우 쿼리를 이용하여 보내주도록 합니다.
 
 export const apis = {
-  getPost: () => instance.get("/api/postings/"),
+  getPost: () => instance.get("/api/postings/", {}),
   // 게시물 불러오기
   createPost: (contents) => instance.post("/api/addpostings", contents),
   // 게시물 작성하기
@@ -24,11 +24,7 @@ export const apis = {
 
 
   getComment: (post_id) => {
-    return instance.get(`/api/postings/${post_id}/comments`, {
-      headers: {
-        authorization: `Bearer ${getToken()}`,
-      },
-    });
+    return instance.get(`/api/postings/${post_id}/comments`, {} );
   },
   // 댓글 불러오기  파라미터 이름은 중요하지않고 주소와 같기만 하면 됨
   addComment: (comment, post_id) =>

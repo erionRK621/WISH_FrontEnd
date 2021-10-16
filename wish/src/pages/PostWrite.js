@@ -38,7 +38,7 @@ const PostWrite = (props) => {
         {img ? (
           <Image shape="rectangle" src={img} />
         ) : (
-          <Image shape="rectangle" src={"http://via.placeholder.com/400x300"} />
+          <Image shape="rectangle" src={"http://via.placeholder.com/500x500"} />
         )}
       </Grid>
 

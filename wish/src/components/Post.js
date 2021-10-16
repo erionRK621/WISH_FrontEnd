@@ -18,6 +18,7 @@ const Post = (props) => {
   const dispatch = useDispatch();
 
   const like = props.Like.length;
+  console.log(props)
 
   // console.log(like);
 
@@ -42,6 +43,7 @@ const Post = (props) => {
             <Image shape="circle" src={props.user_profile} />
             <Text bold>{props.authorName}</Text>
           </Profile>
+          <Text>{props.createdAt}</Text>
         </Grid>
         <Grid>
           <Image
@@ -54,7 +56,6 @@ const Post = (props) => {
         </Grid>
         <Grid is_flex>
           <Text>{props.text}</Text>
-          <Text>{props.createdAt}</Text>
         </Grid>
         <Grid is_flex>
           <Text bold>댓글{props.comment_cnt}개</Text>

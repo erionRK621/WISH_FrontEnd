@@ -21,13 +21,15 @@ const LOADING = "LOADING";
 //타입이 SET_POST인 오브젝트를 반환해주는 액션으로
 //const 무엇 = cratAction(타입, (어떤파라미터) => ({변경될파라미터}));
 const setPost = createAction(SET_POST, (post_list) => ({ post_list }));
+const onePost = createAction(ONE_POST, (post) => ({ post }));
 const editPost = createAction(EDIT_POST, (post_id) => ({ post_id }));
 const deletePost = createAction(DELETE_POST, (post_id) => ({ post_id }));
 const setPreview = createAction(SET_PREVIEW, (preview) => ({ preview }));
 
+
 const likeToggle = createAction(LIKE_TOGGLE, (like) => ({ like }));
 
-const onePost = createAction(ONE_POST, (post) => ({ post }));
+
 
 //초기상태값
 const initialState = {
@@ -59,11 +61,8 @@ const getPostDB = () => {
       .getPost()
       .then((res) => {
         console.log(res);
-        console.log(res.data);
-        if (res.data.token) {
-          window.localStorage.setItem("token", JSON.stringify(res.data.token));
-        }
-        dispatch(setPost(res.data));
+        console.log(res.data.newArray);
+        dispatch(setPost(res.data.newArray));
       })
       .catch((err) => {
         //요청이 정상적으로 안됬을때 수행
@@ -133,13 +132,11 @@ const getOnePostDB = (post_id) => {
     console.log(token);
     axios
       .get(`http://3.35.235.79/api/postings/${post_id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
       })
       .then((res) => {
-        console.log("리스폰쓰", res.data.likeCount);
-        dispatch(likeToggle(res.data.likeCount));
+        console.log(res)
+        console.log(res.newArray);
+        dispatch(onePost(res.newArray));
       })
       .catch((err) => {
         console.log("좋아요 에러", err);
@@ -164,7 +161,8 @@ const LikeDB = (post_id) => {
         }
       )
       .then((res) => {
-        console.log("리스폰쓰", res.data.likeCount);
+        // console.log(res);
+        // console.log("리스폰쓰", res.data.likeCount);
         dispatch(likeToggle(res.data.likeCount));
       })
       .catch((err) => {
@@ -180,8 +178,8 @@ export default handleActions(
       produce(state, (draft) => {
         // undifined는 값이 잘넘어가고있다. 값이 나올경우 어딘가에 문제가 있는것
 
-        console.log(action.payload.postings);
-        draft.list = action.payload.post_list.postings;
+        console.log(action.payload.post_list);
+        draft.list = action.payload.post_list;
         // 새배열에서 푸시를 하게되면 데이터 중복으로 계속 불러와지게됨.
         // draft.list.push(...action.payload.post_list.postings);
 
@@ -203,6 +201,14 @@ export default handleActions(
         // draft.is_loading = false;
       }),
 
+    
+    [ONE_POST]: (state, action) =>
+      produce(state, (draft) => {
+        // 배열의 몇 번째에 있는 지 찾습니다.
+        console.log(action.payload.postings);
+        draft.list = action.payload.post_list.postings;
+      
+      }),
     [EDIT_POST]: (state, action) =>
       produce(state, (draft) => {
         // 배열의 몇 번째에 있는 지 찾습니다.
