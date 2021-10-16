@@ -18,11 +18,10 @@ import CommentWrite from "../components/CommentWrite";
 const PostDetail = (props) => {
   const dispatch = useDispatch();
   let post_id = props.match.params.id;
-  const post_list = useSelector((state) => state.post.list)
-  const user_id = useSelector((state) => state.user._id)
+  const post_list = useSelector((state) => state.post.list);
+  const user_id = useSelector((state) => state.user._id);
   console.log(post_list);
   console.log(user_id);
-
 
   let _post = post_list.find((p) => p._id === post_id);
   console.log(_post.authorID);
@@ -33,7 +32,6 @@ const PostDetail = (props) => {
   // console.log(props);
 
   // console.log(post_list);
-
 
   const deletePost = () => {
     if (window.confirm("정말 삭제하시겠습니까?")) {
@@ -48,32 +46,34 @@ const PostDetail = (props) => {
   const editPost = () => {
     history.push("/edit/" + post_id);
   };
-  console.log(user_id)
-  console.log(_post.authorID)
-  if(user_id == _post.authorID) {
+
+  console.log(user_id);
+  console.log(_post.authorID);
+  if (user_id == _post.authorID) {
     return (
       <>
         <div>
-        <PostContainer>
-        <Grid padding="16px" bg="#ffffff" margin="8px 0px">
-          <Grid is_flex>
-            <Profile>
-              <Image shape="circle" src={props.user_profile} />
-              <Text bold>{_post.authorName}</Text>
-            </Profile>
-            <Text>{_post.createdAt}</Text>
-          </Grid>
-          <Grid>
-            <Image
-              shape="rectangle"
-              src={`http://3.35.235.79/${_post.imageUrl}`}
-            />
-          </Grid>
-          <Grid is_flex>
-            <p>{_post.text}</p>
-          </Grid>
-        </Grid>
-      </PostContainer>
+          <PostContainer>
+            <Grid padding="16px" bg="#ffffff" margin="8px 0px">
+              <Grid is_flex>
+                <Profile>
+                  <Image shape="circle" src={props.user_profile} />
+                  <Text bold>{_post.authorName}</Text>
+                </Profile>
+                <Text>{_post.createdAt}</Text>
+              </Grid>
+              <Grid>
+                <Image
+                  shape="rectangle"
+                  src={`http://3.35.235.79/${_post.imageUrl}`}
+                />
+              </Grid>
+              <Grid is_flex>
+                <p>{_post.text}</p>
+              </Grid>
+            </Grid>
+          </PostContainer>
+
           <Grid is_flex>
             <Button text="수정" _onClick={editPost} />
             <Button text="삭제" _onClick={deletePost} />
@@ -84,44 +84,42 @@ const PostDetail = (props) => {
           </div>
         </div>
       </>
-    )
+    );
   } else {
     return (
       <>
-      <div>
-      <PostContainer>
-      <Grid padding="16px" bg="#ffffff" margin="8px 0px">
-        <Grid is_flex>
-          <Profile>
-            <Image shape="circle" src={props.user_profile} />
-            <Text bold>{_post.authorName}</Text>
-          </Profile>
-          <Text>{_post.createdAt}</Text>
-        </Grid>
-        <Grid>
-          <Image
-            shape="rectangle"
-            src={`http://3.35.235.79/${_post.imageUrl}`}
-          />
-        </Grid>
-        <Grid is_flex>
-          <Text>{_post.text}</Text>
-          <FavoriteIcon/>
-        </Grid>
-      </Grid>
-    </PostContainer>
-    {/* {user_id == _post.authorName &&} */}
-        <div style={{ textAlign: "center" }}>
-          <CommentWrite />
-          <CommentList />
+        <div>
+          <PostContainer>
+            <Grid padding="16px" bg="#ffffff" margin="8px 0px">
+              <Grid is_flex>
+                <Profile>
+                  <Image shape="circle" src={props.user_profile} />
+                  <Text bold>{_post.authorName}</Text>
+                </Profile>
+                <Text>{_post.createdAt}</Text>
+              </Grid>
+              <Grid>
+                <Image
+                  shape="rectangle"
+                  src={`http://3.35.235.79/${_post.imageUrl}`}
+                />
+              </Grid>
+              <Grid is_flex>
+                <Text>{_post.text}</Text>
+                <FavoriteIcon />
+              </Grid>
+            </Grid>
+          </PostContainer>
+          {/* {user_id == _post.authorName &&} */}
+          <div style={{ textAlign: "center" }}>
+            <CommentWrite />
+            <CommentList />
+          </div>
         </div>
-      </div>
-    </>
-      );
+      </>
+    );
   }
-  
 };
-
 
 const PostContainer = styled.div`
   background-color: white;

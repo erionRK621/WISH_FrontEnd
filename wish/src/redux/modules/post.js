@@ -27,10 +27,7 @@ const editPost = createAction(EDIT_POST, (post_id) => ({ post_id }));
 const deletePost = createAction(DELETE_POST, (post_id) => ({ post_id }));
 const setPreview = createAction(SET_PREVIEW, (preview) => ({ preview }));
 
-
 const likeToggle = createAction(LIKE_TOGGLE, (like) => ({ like }));
-
-
 
 //초기상태값
 const initialState = {
@@ -64,13 +61,6 @@ const getPostDB = () => {
         console.log(res);
         console.log(res.data.newArray);
         dispatch(setPost(res.data.newArray));
-        // let post_id_list = res.data.newArray._id
-        // post_id_list.map((p, idx) => { 
-        //   console.log(p);
-        //   dispatch(commentActions.getCommentDB(p))
-         
-        // }
-        // )
       })
       .catch((err) => {
         //요청이 정상적으로 안됬을때 수행
@@ -140,7 +130,7 @@ const getOnePostDB = (post_id) => {
     axios
       .get(`http://3.35.235.79/api/postings/${post_id}`, {})
       .then((res) => {
-        console.log(res)
+        console.log(res);
         console.log(res.newArray);
         dispatch(onePost(res.newArray));
       })
@@ -207,13 +197,11 @@ export default handleActions(
         // draft.is_loading = false;
       }),
 
-    
     [ONE_POST]: (state, action) =>
       produce(state, (draft) => {
         // 배열의 몇 번째에 있는 지 찾습니다.
         console.log(action.payload.postings);
         draft.list = action.payload.post_list.postings;
-      
       }),
     [EDIT_POST]: (state, action) =>
       produce(state, (draft) => {

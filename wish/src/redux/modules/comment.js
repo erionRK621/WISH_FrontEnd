@@ -21,7 +21,7 @@ const DELETE_COMMENT = "DELETE_COMMENT";
 //액션생성함수만들기
 const getComment = createAction(GET_COMMENT, (comment_list, comment_cnt) => ({
   comment_list,
-  comment_cnt
+  comment_cnt,
 }));
 const addComment = createAction(ADD_COMMENT, (comment) => ({
   comment,
@@ -42,12 +42,9 @@ export const getCommentDB = (postId) => {
     apis
       .getComment(postId)
       .then((res) => {
-
-
-        console.log("!!!!!!!!!", res);
-
         const commentList = res.data.allComments;
-        console.log(commentList.length)
+
+        console.log(commentList.length);
         dispatch(getComment(commentList, commentList.length));
       })
       .catch((error) => {
@@ -64,7 +61,6 @@ export const addCommentDB = (_comment) => {
     apis.addComment(_comment.comment_text, _comment.post_id).then((res) => {
       dispatch(getCommentDB(_comment.post_id));
     });
-
   };
 };
 
@@ -87,14 +83,14 @@ export default handleActions(
   {
     [GET_COMMENT]: (state, action) =>
       produce(state, (draft) => {
-        console.log(action)
+        console.log(action);
         draft.list = action.payload.comment_list;
         draft.cnt = action.payload.comment_list.length;
-        console.log(draft.cnt)
+        console.log(draft.cnt);
       }),
     [ADD_COMMENT]: (state, action) =>
       produce(state, (draft) => {
-        console.log("action.payload!!!", action.payload);
+        // console.log("action.payload!!!", action.payload);
         draft.list.unshift(action.payload.comment);
       }),
 
