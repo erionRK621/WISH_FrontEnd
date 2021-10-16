@@ -84,15 +84,16 @@ const Header = (props) => {
               history.push("/login");
             }}
           >
-            LOGIN
+            LOG IN
           </Button>
+
           <Button
             variant="outlined"
             onClick={() => {
               history.push("/signup");
             }}
           >
-            LOGOUT
+            SIGN UP
           </Button>
         </ButtonGroup>
       </Grid>

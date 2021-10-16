@@ -61,11 +61,6 @@ const getPostDB = () => {
         console.log(res);
         console.log(res.data.newArray);
         dispatch(setPost(res.data.newArray));
-        // let post_id_list = res.data.newArray._id;
-        // post_id_list.map((p, idx) => {
-        //   console.log(p);
-        //   dispatch(commentActions.getCommentDB(p));
-        // });
       })
       .catch((err) => {
         //요청이 정상적으로 안됬을때 수행

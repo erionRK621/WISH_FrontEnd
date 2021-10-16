@@ -46,6 +46,7 @@ const PostDetail = (props) => {
   const editPost = () => {
     history.push("/edit/" + post_id);
   };
+
   console.log(user_id);
   console.log(_post.authorID);
   if (user_id == _post.authorID) {
@@ -72,6 +73,7 @@ const PostDetail = (props) => {
               </Grid>
             </Grid>
           </PostContainer>
+
           <Grid is_flex>
             <Button text="수정" _onClick={editPost} />
             <Button text="삭제" _onClick={deletePost} />
