@@ -55,10 +55,12 @@ const getUserDB = () => {
         },
       })
       .then((response) => {
+        console.log("겟 유저 디비", response);
         dispatch(
           getUser({
             nick: response.data.nick,
             email: response.data.email,
+            _id: response.data._id,
           })
         );
       });
@@ -80,14 +82,20 @@ const loginDB = (email, password) => {
             is_login: true,
           })
         );
+
         window.localStorage.setItem(
           "token",
           JSON.stringify(response.data.token)
         );
+
         history.push("/");
       })
+      .then((res) => {
+        dispatch(getUserDB());
+      })
       .catch((error) => {
-        console.log("Login Error", error);
+        console.log("Login Error", error.response);
+        window.alert(error.response);
       });
   };
 };
@@ -149,6 +157,7 @@ export default handleActions(
         draft.nick = action.payload.user.nick;
         draft.email = action.payload.user.email;
         draft.is_login = true;
+        draft._id = action.payload.user._id;
       }),
 
     [LOG_OUT]: (state, action) =>

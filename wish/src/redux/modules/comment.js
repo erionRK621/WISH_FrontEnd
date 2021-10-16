@@ -41,12 +41,9 @@ export const getCommentDB = (postId) => {
     apis
       .getComment(postId)
       .then((res) => {
-
-
-        console.log("!!!!!!!!!", res);
-
         const commentList = res.data.allComments;
         dispatch(getComment(commentList));
+        console.log(res);
       })
       .catch((error) => {
         window.alert("댓글을 불러오는데 실패하였습니다.");
@@ -62,7 +59,6 @@ export const addCommentDB = (_comment) => {
     apis.addComment(_comment.comment_text, _comment.post_id).then((res) => {
       dispatch(getCommentDB(_comment.post_id));
     });
-
   };
 };
 
@@ -89,7 +85,7 @@ export default handleActions(
       }),
     [ADD_COMMENT]: (state, action) =>
       produce(state, (draft) => {
-        console.log("action.payload!!!", action.payload);
+        // console.log("action.payload!!!", action.payload);
         draft.list.unshift(action.payload.comment);
       }),
 

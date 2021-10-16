@@ -19,9 +19,7 @@ const PostList = (props) => {
   useEffect(() => {
     dispatch(postCreators.getPostDB());
   }, []);
-  console.log("renders");
 
-  console.log(post_list);
   return (
     <>
       <Image shape="main" src={Banner} style={{ position: "absolute" }} />
