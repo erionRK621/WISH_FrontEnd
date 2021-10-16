@@ -23,17 +23,17 @@ const PostDetail = (props) => {
   console.log(post_list)
 
 
-// 1.수정포인트
-//   //유저아이디
-//   //포스트를 작성한 유저아이디
+  let _post = post_list.find((p) => p._id === post_id);
 
-// 2.토큰
+  // console.log(_post);
+  // console.log(_post._id);
+  // console.log(_post.authorName);
+  // console.log(_post.text);
+  // console.log(_post.imageUrl);
 
-  let _post = post_list.find((p) => p._id === post_id)
+  // console.log(props);
 
-  console.log(_post.authorName)
-  console.log(user_id)
-
+  // console.log(post_list);
 
 
   const deletePost = () => {

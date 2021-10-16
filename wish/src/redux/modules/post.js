@@ -128,11 +128,9 @@ const deletePostDB = (post_id) => {
 const getOnePostDB = (post_id) => {
   return function (dispatch, getState, { history }) {
     console.log(post_id);
-    const token = getToken();
-    console.log(token);
+
     axios
-      .get(`http://3.35.235.79/api/postings/${post_id}`, {
-      })
+      .get(`http://3.35.235.79/api/postings/${post_id}`, {})
       .then((res) => {
         console.log(res)
         console.log(res.newArray);

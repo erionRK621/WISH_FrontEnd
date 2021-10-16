@@ -54,13 +54,16 @@ function App() {
             <Route path="/edit/:id" exact component={PostEdit}></Route>
           </Switch>
         </ConnectedRouter>
-        <Button
-          is_float
-          text="+"
-          _onClick={() => {
-            history.push("/write");
-          }}
-        ></Button>
+
+        {user.is_login && (
+          <Button
+            is_float
+            text="+"
+            _onClick={() => {
+              history.push("/write");
+            }}
+          ></Button>
+        )}
       </Grid>
     </React.Fragment>
   );
