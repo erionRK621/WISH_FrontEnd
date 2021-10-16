@@ -40,6 +40,8 @@ const user_intial = {
   password: "password",
   user_profile:
     "https://images.unsplash.com/photo-1540331547168-8b63109225b7?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=719&q=80",
+  token: null,
+  is_login: false,
 };
 
 const getUserDB = () => {
@@ -104,6 +106,7 @@ const signupDB = (nick, email, password, confirmPassword) => {
         // { withCredentials: true }
       )
       .then((response) => {
+        console.log("회원가입 리스폰스", response);
         dispatch(
           setUser({
             nick: nick,
@@ -114,8 +117,9 @@ const signupDB = (nick, email, password, confirmPassword) => {
         );
         history.push("/login");
       })
-      .catch((error) => {
-        console.log("DB ERROR", error);
+      .catch((err) => {
+        console.log(err.response);
+        window.alert(err.response.data.msg);
       });
   };
 };
