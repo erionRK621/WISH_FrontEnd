@@ -14,6 +14,7 @@ const Mypage = (props) => {
   const { history } = props;
   //포스트리스트값 불러오기
   const post_list = useSelector((state) => state.post.list);
+  const img = useSelector((state) => state.image);
   console.log(post_list);
 
   useEffect(() => {

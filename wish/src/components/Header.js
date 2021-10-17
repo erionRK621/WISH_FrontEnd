@@ -15,6 +15,8 @@ const Header = (props) => {
   const dispatch = useDispatch();
 
   const is_login = useSelector((state) => state.user.is_login);
+  const userid = useSelector((state) => state.user.email);
+  console.log(userid);
 
   const logout = () => {
     dispatch(userActions.logOut());
@@ -37,7 +39,7 @@ const Header = (props) => {
             <AccountCircleIcon
               sx={{ fontSize: 40 }}
               onClick={() => {
-                history.push("/mypage");
+                history.push("/api/users/${userid}`");
               }}
             ></AccountCircleIcon>
             <NotificationsActiveIcon
