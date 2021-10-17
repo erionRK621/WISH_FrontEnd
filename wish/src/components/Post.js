@@ -65,7 +65,7 @@ const Post = (props) => {
           <Text>{props.text}</Text>
         </Grid>
         <Grid is_flex>
-          <Text bold>댓글{props.comment_cnt}개 </Text>
+          <Text bold>댓글{props.commentsCnt}개 </Text>
           {is_login && like_result && (
             <FavoriteIcon
               style={{ color: "lightpink" }}
