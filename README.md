@@ -18,7 +18,7 @@
 
 ![와이어프레임](https://user-images.githubusercontent.com/83391349/137580345-b9146632-34e8-484a-997b-bee7c67adc56.png)
 
-## 🖥Fromt-End 기술스택
+## 🖥Front-End 기술스택
 
 ![KakaoTalk_Photo_2021-10-16-17-02-40](https://user-images.githubusercontent.com/83391349/137579773-0ab85eca-5e4d-4f93-bd92-ff987f84a4ef.png)
 
